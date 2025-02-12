@@ -3,7 +3,7 @@ import { Users, Globe, Newspaper, Shield, MessageCircle } from "lucide-react";
 export default function About() {
   return (
     <div className="container mx-auto px-6 py-12">
-      {/* Hero Section */}
+      {/* Hero Section  /*}
       <div className="relative bg-blue-600 text-white p-10 rounded-lg shadow-lg text-center">
         <h1 className="text-5xl font-extrabold">Who We Are</h1>
         <p className="text-lg mt-3 max-w-2xl mx-auto">
