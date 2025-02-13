@@ -15,7 +15,7 @@ export default function Sidebar() {
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-72 bg-black text-white p-6 shadow-xl transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-60 bg-black text-white p-6 shadow-xl transform transition-transform duration-300 ${
           open ? "translate-x-0" : "-translate-x-full"
         } z-50 border-r border-gray-800`}
       >
@@ -31,8 +31,8 @@ export default function Sidebar() {
         <h2 className="text-2xl font-semibold mb-6 border-b border-gray-800 pb-2">
           News Portal
         </h2>
-
-        <ul className="space-y-5 text-lg font-medium">
+        
+        <ul className="space-y-5 text-lg font-medium overflow-y-auto max-h-[calc(100vh-10rem)] no-scrollbar">
           <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
             <FaHome size={20} />
             <Link to="/" className="w-full text-white" onClick={closeSidebar}>
@@ -58,7 +58,47 @@ export default function Sidebar() {
               Contact
             </Link>
           </li>
+
+          {/* New */}
+         
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+              Country
+            </Link>
+          </li>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+              World
+            </Link>
+          </li>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+            Entertainment
+            </Link>
+          </li>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+              Cricket
+            </Link>
+          </li>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+              Business
+            </Link>
+          </li>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+            {/* <FaPhoneAlt size={20} /> */}
+            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
+              Stock News
+            </Link>
+          </li>
         </ul>
+        
       </aside>
 
       {/* Backdrop */}

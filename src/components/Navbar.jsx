@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaUserCircle, FaSearch, FaGlobe, FaBell } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { useSidebar } from "../SidebarProvider/SidebarProvider";
+import GoogleTranslate from "../GoogleTranslate/GoogleTranslate.jsx";
 
 const Navbar = () => {
   const { setOpen } = useSidebar();
@@ -49,11 +50,7 @@ const Navbar = () => {
               <FaSearch className="absolute right-3 top-3 text-gray-400 cursor-pointer" />
             </div>
 
-            <select className="bg-gray-900 text-white px-4 py-2 rounded-full border border-gray-700 hover:bg-gray-800 cursor-pointer transition-all duration-200">
-              <option value="en">English</option>
-              <option value="hi">हिन्दी</option>
-              <option value="es">Español</option>
-            </select>
+           < GoogleTranslate />
 
             <FaBell size={24} className="hover:text-yellow-400 transition-all duration-200 cursor-pointer" />
             <FaUserCircle size={32} className="hover:text-blue-400 transition-all duration-200 cursor-pointer" />
