@@ -2,16 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Home, Video, Tv, Menu, Film } from "lucide-react";
 import { useSidebar } from "../SidebarProvider/SidebarProvider"; // Sidebar context import karo
-
+import NewsReel from "./NewsReel"
 export default function BottomNav() {
   const [active, setActive] = useState("home");
   const { setOpen } = useSidebar(); // Sidebar open karne ke liye hook
 
   const navItems = [
     { title: "Home", icon: Home, id: "home", path: "/" },
-    { title: "Videos", icon: Video, id: "video", path: "/videos" },
+    { title: "Videos", icon: Video, id: "video", path: "/Youtube" },
     { title: "Live TV", icon: Tv, id: "livetv", path: "/live-tv" },
-    { title: "News Reels", icon: Film, id: "reels", path: "/news-reels" },
+    { title: "News Reels", icon: Film, id: "reels", path: "/NewsReels" },
     { title: "Menu", icon: Menu, id: "menu", path: "#" },
   ];
 
