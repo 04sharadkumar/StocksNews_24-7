@@ -15,8 +15,20 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  const notify = () => toast("LogOut");
-
+  const notify = () => {
+    setTimeout(() => {
+      toast.success("Logged Out Successfully!", {
+        position: "top-right",
+        autoClose: 2000, // Toast will be visible for 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+      });
+    }, 20); // Delay before showing the toast
+  };
+  
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
@@ -38,9 +50,16 @@ const Navbar = () => {
       navigate(`/search?q=${query}`);
     }
   };
+  const handleLogout = () => {
+    setIsDropdownOpen(false); 
+    
+    notify(); // Ensure notify() is being called
+    
+  };
 
   return (
     <div className="w-full">
+      <ToastContainer />
       <nav className="bg-black text-white px-4 py-3 w-full sticky top-0 z-50 shadow-lg border-b border-gray-800">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
@@ -101,12 +120,13 @@ const Navbar = () => {
                   <Link 
                     to="/" 
                     className="block px-4 py-2 text-red-500 hover:bg-gray-100" 
-                    onClick={() => setIsDropdownOpen(false)}
+                    onClick={handleLogout}
                   >
                     Logout
                   </Link>
-                  <ToastContainer />
+                  
                 </div>
+                
               )}
             </div>
           </div>
