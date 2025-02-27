@@ -61,42 +61,8 @@ export default function Sidebar() {
 
           {/* New */}
          
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-              Country
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-              World
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-            Entertainment
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-              Cricket
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-              Business
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            {/* <FaPhoneAlt size={20} /> */}
-            <Link to="#" className="w-full text-white" onClick={closeSidebar}>
-              Stock News
-            </Link>
-          </li>
+          
+          
         </ul>
         
       </aside>
@@ -111,3 +77,6 @@ export default function Sidebar() {
     </>
   );
 }
+
+
+

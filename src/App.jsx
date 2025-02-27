@@ -13,8 +13,10 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services.jsx";
 import Contact from "./pages/Contact";
-import NewsReel from "./pages/NewsReel.jsx";
+import LiveVideoNews from "./pages/LiveVideoNews.jsx";
 import Youtube from "./pages/Youtube.jsx";
+import GlobalNews from "./pages/GlobalNews.jsx";
+import StocksNews from "./pages/StocksNews.jsx";
 
 function App() {
   return (
@@ -28,12 +30,18 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/NewsReels" element={<NewsReel />} />
+         
           <Route path="Youtube" element={<Youtube />} />
           <Route path="/search" element={<SearchResults />} />
 
           <Route path='/ProfilePage' element={<ProfilePage />} />
           <Route path='/SettingPage' element={<SettingsPage />} />
+
+
+          <Route path="/LiveVideoNews" element={<LiveVideoNews />} />
+          <Route path="/StocksNews" element={<StocksNews />} />
+          <Route path="/GlobalNews" element={<GlobalNews />} />
+          
           
 
         </Routes>

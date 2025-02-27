@@ -15,19 +15,21 @@ const Navbar = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  const notify = () => {
-    setTimeout(() => {
-      toast.success("Logged Out Successfully!", {
-        position: "top-right",
-        autoClose: 2000, // Toast will be visible for 3 seconds
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-      });
-    }, 20); // Delay before showing the toast
-  };
+ const notify = () => {
+  setTimeout(() => {
+    toast.success("Logged Out Successfully!", {
+      position: "top-right",
+      autoClose: 3000, // Toast will be visible for 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+      className: "custom-toast", // Apply custom CSS
+    });
+  }, 20); // Small delay before showing the toast
+};
+
   
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);

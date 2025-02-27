@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Home, Video, Tv, Menu, Film } from "lucide-react";
-import { useSidebar } from "../SidebarProvider/SidebarProvider"; // Sidebar context import karo
-import NewsReel from "./NewsReel"
+import { Home, Globe2, Tv, TrendingUp, Newspaper } from "lucide-react"; // Changed icons
+import { useSidebar } from "../SidebarProvider/SidebarProvider"; // Sidebar context import
+
 export default function BottomNav() {
   const [active, setActive] = useState("home");
-  const { setOpen } = useSidebar(); // Sidebar open karne ke liye hook
+  const { setOpen } = useSidebar(); // Sidebar open function
 
   const navItems = [
     { title: "Home", icon: Home, id: "home", path: "/" },
-    { title: "Videos", icon: Video, id: "video", path: "/Youtube" },
-    { title: "Live TV", icon: Tv, id: "livetv", path: "/live-tv" },
-    { title: "News Reels", icon: Film, id: "reels", path: "/NewsReels" },
-    { title: "Menu", icon: Menu, id: "menu", path: "#" },
+    { title: "Country", icon: Globe2, id: "country", path: "/country-news" }, // Country uses Globe2
+    { title: "Live TV", icon: Tv, id: "livetv", path: "/LiveVideoNews" }, 
+    { title: "Stocks", icon: TrendingUp, id: "stocks", path: "/StocksNews" }, // Updated path
+    { title: "Global News", icon: Newspaper, id: "global-news", path: "/GlobalNews" } // Global uses Newspaper icon
   ];
 
   const handleMenuClick = () => {
     setActive("menu");
-    setOpen(true); // Sidebar open karne ka function call
+    setOpen(true); // Open Sidebar
   };
 
   return (

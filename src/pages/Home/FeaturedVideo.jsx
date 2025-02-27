@@ -7,7 +7,7 @@ const FeaturedVideo = () => {
       <div className="relative w-full max-w-3xl mx-auto h-56 sm:h-72 md:h-80 lg:h-96">
         <iframe
           className="w-full h-full rounded-lg shadow-lg"
-          src="https://www.youtube.com/embed/U7gIvPeOSxc?si=zKxIQseSczxvWVxV"
+          src="https://www.youtube.com/embed/QxddU3sjVRY?si=JXpw15AdJATps_7i"
           title="Featured News Video"
           frameBorder="0"
           allowFullScreen
