@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Globe, Briefcase, TrendingUp, Film, Landmark, Newspaper, PlayCircle } from "lucide-react";
 
 const NewsSection = ({ title, icon: Icon, news = [] }) => {
@@ -42,15 +43,66 @@ const NewsSection = ({ title, icon: Icon, news = [] }) => {
   );
 };
 
-const NewsContainer = ({ indiaNews, sportsNews, entertainmentNews, stocksNews, businessNews, worldNews }) => {
+const fetchNews = async (category) => {
+  try {
+    const response = await fetch(`https://newsapi.org/v2/top-headlines?category=${category}&country=in&apiKey=29e959f99d8941e1bae06d5c3ca17b61`);
+    const data = await response.json();
+    return data.articles.map(article => ({
+      title: article.title,
+      url: article.url,
+      source: article.source.name,
+      image: article.urlToImage || "https://via.placeholder.com/100"
+    }));
+  } catch (error) {
+    console.error("Error fetching news:", error);
+    return [];
+  }
+};
+
+const NewsContainer = () => {
+  const [newsData, setNewsData] = useState({
+    indiaNews: [],
+    sportsNews: [],
+    entertainmentNews: [],
+    stocksNews: [],
+    businessNews: [],
+    worldNews: []
+  });
+
+  useEffect(() => {
+    (async () => {
+      setNewsData({
+        indiaNews: await fetchNews("general"),
+        sportsNews: await fetchNews("sports"),
+        entertainmentNews: await fetchNews("entertainment"),
+        stocksNews: await fetchNews("business"),
+        businessNews: await fetchNews("technology"),
+        worldNews: await fetchNews("world")
+      });
+    })();
+  }, []);
+
   return (
     <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
-      <NewsSection title="Latest News from India" icon={Newspaper} news={indiaNews} />
-      <NewsSection title="Sports News" icon={Landmark} news={sportsNews} />
-      <NewsSection title="Entertainment News" icon={Film} news={entertainmentNews} />
-      <NewsSection title="Stocks News" icon={TrendingUp} news={stocksNews} />
-      <NewsSection title="Business News" icon={Briefcase} news={businessNews} />
-      <NewsSection title="World News" icon={Globe} news={worldNews} />
+      <div>
+        <NewsSection title="Latest News from India" icon={Newspaper} news={newsData.indiaNews} />
+      </div>
+      <div>
+        <NewsSection title="Sports News" icon={Landmark} news={newsData.sportsNews} />
+      </div>
+      <div>
+        <NewsSection title="Entertainment News" icon={Film} news={newsData.entertainmentNews} />
+      </div>
+      <div>
+        <NewsSection title="Stocks News" icon={TrendingUp} news={newsData.stocksNews} />
+      </div>
+      <div>
+        <NewsSection title="Business News" icon={Briefcase} news={newsData.businessNews} />
+      </div>
+      <div>
+        <NewsSection title="World News" icon={Globe} news={newsData.worldNews} />
+        
+      </div>
     </div>
   );
 };

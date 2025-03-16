@@ -3,16 +3,16 @@ import axios from 'axios';
 import { FiGlobe } from 'react-icons/fi';
 
 const GlobalNews = () => {
-    const [query, setQuery] = useState(''); // State for search query
-    const [news, setNews] = useState([]); // State for news data
-    const [loading, setLoading] = useState(false); // State for loading status
-    const [error, setError] = useState(null); // State for error messages
+    const [query, setQuery] = useState('');
+    const [news, setNews] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const API_KEY = 'b88df71f04a74c5693e9cdae86ed05ae'; // Replace with your News API key
+    const API_KEY = 'b88df71f04a74c5693e9cdae86ed05ae';
 
     const fetchNews = async (initial = false) => {
         setLoading(true);
-        setError(null); // Reset error state
+        setError(null);
 
         try {
             const response = await axios.get(`https://newsapi.org/v2/everything?q=${query || 'latest'}&apiKey=${API_KEY}`);
@@ -20,25 +20,25 @@ const GlobalNews = () => {
             const filteredNews = response.data.articles.filter(article =>
                 article.title.toLowerCase().includes(query.toLowerCase())
             );
-            setNews(filteredNews.slice(0, initial ? 5 : 10)); // Show latest 5 news initially, limit search results to 10
+            setNews(filteredNews.slice(0, initial ? 5 : 10));
         } catch (err) {
-            setError('Could not fetch news data.'); // Set error message
+            setError('Could not fetch news data.');
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        fetchNews(true); // Fetch initial latest news
+        fetchNews(true);
     }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchNews(); // Fetch news on form submit
+        fetchNews();
     };
 
     return (
-        <div className="p-6 max-w-4xl mx-auto bg-gray-50 text-black rounded-lg shadow-lg">
+        <div className="p-6 max-w-full mx-auto bg-blue-100 text-black rounded-lg shadow-lg">
             <h1 className="text-3xl font-bold text-center mb-4 text-gray-900">Global News Hub</h1>
             <form onSubmit={handleSubmit} className="flex gap-2 justify-center mb-6">
                 <input
@@ -57,7 +57,7 @@ const GlobalNews = () => {
             {error && <p className="text-center text-red-500">{error}</p>}
             {news.length > 0 && (
                 <div className="bg-white p-4 rounded-lg shadow-md">
-                    <div className="flex items-center mb-4 border-b border-gray-300 pb-2">
+                    <div className="flex items-center mb-4 border-b border-gray-300 pb-2 bg-blue-100 p-3 rounded-lg shadow-sm">
                         <FiGlobe className="text-gray-800 text-2xl mr-2" />
                         <h3 className="text-xl font-semibold text-gray-900">Latest Headlines</h3>
                     </div>

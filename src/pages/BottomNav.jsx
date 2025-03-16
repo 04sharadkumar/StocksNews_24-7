@@ -9,7 +9,7 @@ export default function BottomNav() {
 
   const navItems = [
     { title: "Home", icon: Home, id: "home", path: "/" },
-    { title: "Country", icon: Globe2, id: "country", path: "/country-news" }, // Country uses Globe2
+    { title: "Country", icon: Globe2, id: "Country", path: "/CountryNews" }, // Country uses Globe2
     { title: "Live TV", icon: Tv, id: "livetv", path: "/LiveVideoNews" }, 
     { title: "Stocks", icon: TrendingUp, id: "stocks", path: "/StocksNews" }, // Updated path
     { title: "Global News", icon: Newspaper, id: "global-news", path: "/GlobalNews" } // Global uses Newspaper icon

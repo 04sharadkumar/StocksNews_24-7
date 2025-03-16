@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SidebarProvider } from "./SidebarProvider/SidebarProvider.jsx";
-import Navbar from "./components/Navbar.jsx";
+import Navbar from "./components/NavbarComponent/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Sidebar from "./components/Sidebar.jsx"
 import BottomNav from "./pages/BottomNav.jsx"
@@ -17,6 +17,7 @@ import LiveVideoNews from "./pages/LiveVideoNews.jsx";
 import Youtube from "./pages/Youtube.jsx";
 import GlobalNews from "./pages/GlobalNews.jsx";
 import StocksNews from "./pages/StocksNews.jsx";
+import CountryNews from "./pages/CountryNews.jsx";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/LiveVideoNews" element={<LiveVideoNews />} />
           <Route path="/StocksNews" element={<StocksNews />} />
           <Route path="/GlobalNews" element={<GlobalNews />} />
+          <Route path="/CountryNews" element={<CountryNews />} />
           
           
 

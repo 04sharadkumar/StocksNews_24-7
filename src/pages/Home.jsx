@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import BreakingNewsTicker from "./Home/BreakingNewsTicker";
-import HeroNews from "./Home/HeroNews";
-import WeatherWidget from "./Home/WeatherWidget";
-import TrendingTopics from "./Home/TrendingTopics";
-import FeaturedVideo from "./Home/FeaturedVideo";
-import Poll from "./Home/Poll";
-import IndiaNews from "./Home/IndiaNews";
+import BreakingNewsTicker from "@/components/Home/BreakingNewsTicker";
+import HeroNews from "@/components/Home/HeroNews";
+import WeatherWidget from "@/components/Home/WeatherWidget";
+import TrendingTopics from "@/components/Home/TrendingTopics";
+import FeaturedVideo from "@/components/Home/FeaturedVideo";
+import Poll from "@/components/Home/Poll";
+import IndiaNews from "@/components/Home/IndiaNews"
 
 const newsData = [
   {
@@ -63,11 +63,13 @@ const Home = () => {
       {/* Featured Video */}
       <FeaturedVideo />
 
-      {/* Poll Section */}
-      <Poll />
+      
 
       {/* country News */}
       <IndiaNews />
+
+      {/* Poll Section */}
+      <Poll />
       
 
 
