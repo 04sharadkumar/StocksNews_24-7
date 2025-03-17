@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const HeroNews = () => {
   const [newsData, setNewsData] = useState([]);
@@ -8,18 +8,18 @@ const HeroNews = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+        const response = await axios.get("https://newsapi.org/v2/top-headlines", {
           params: {
-            apiKey: 'b88df71f04a74c5693e9cdae86ed05ae',
-            country: 'us',
-            category: 'general',
+            apiKey: "b88df71f04a74c5693e9cdae86ed05ae",
+            country: "us",
+            category: "general",
           },
         });
 
         console.log("Fetched news data:", response.data);
         setNewsData(response.data.articles);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
 
@@ -31,7 +31,7 @@ const HeroNews = () => {
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % newsData.length);
-    }, 30000); // Change news every 30 seconds
+    }, 30000);
 
     return () => clearInterval(interval);
   }, [newsData]);
@@ -39,17 +39,19 @@ const HeroNews = () => {
   const currentNews = newsData[currentIndex];
 
   return (
-    <div className="relative max-w-3xl mx-auto">
+    <div className="relative max-w-4xl mx-auto mt-6 p-4">
       {currentNews ? (
         <>
-          <img 
-            src={currentNews.urlToImage || "https://via.placeholder.com/600x400"} 
-            alt="News" 
-            className="rounded-lg shadow-lg w-full h-72 object-cover" 
+          <img
+            src={currentNews.urlToImage || "https://via.placeholder.com/600x400"}
+            alt="News"
+            className="rounded-lg shadow-lg w-full h-80 md:h-96 object-cover"
           />
-          <div className="absolute bottom-0 left-0 bg-black bg-opacity-60 text-white p-4 w-full">
-            <h2 className="text-xl font-semibold">{currentNews.title}</h2>
-            <p className="text-sm opacity-80">{new Date(currentNews.publishedAt).toLocaleDateString()}</p>
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-black/60 to-transparent p-5 rounded-b-lg">
+            <h2 className="text-lg md:text-2xl font-bold text-white">{currentNews.title}</h2>
+            <p className="text-xs md:text-sm text-gray-300 mt-1">
+              {new Date(currentNews.publishedAt).toLocaleDateString()}
+            </p>
           </div>
         </>
       ) : (

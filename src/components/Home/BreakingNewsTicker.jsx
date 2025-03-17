@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const BreakingNewsTicker = () => {
   const [newsData, setNewsData] = useState([]);
@@ -8,20 +8,18 @@ const BreakingNewsTicker = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+        const response = await axios.get("https://newsapi.org/v2/top-headlines", {
           params: {
-            apiKey: 'b88df71f04a74c5693e9cdae86ed05ae',
-            country: 'us',
-            category: 'general',
+            apiKey: "b88df71f04a74c5693e9cdae86ed05ae",
+            country: "us",
+            category: "general",
           },
         });
 
         console.log("Fetched news data:", response.data);
-
-        // Store the news data
         setNewsData(response.data.articles);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
 
@@ -33,40 +31,20 @@ const BreakingNewsTicker = () => {
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % newsData.length);
-    }, 4000); // Change news every 4 seconds
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [newsData]);
 
   return (
-    <div className="bg-red-600 text-white p-3 rounded-lg mb-4 overflow-hidden shadow-lg border border-gray-200 text-center">
-      <span className="text-lg font-semibold tracking-wide animate-fade-in">
-        {newsData.length > 0 ? newsData[currentIndex]?.title : "Loading breaking news..."}
-      </span>
+    <div className="bg-red-600 text-white p-3 rounded-lg mb-4 overflow-hidden shadow-lg border border-gray-200">
+      <div className="flex items-center justify-center">
+        <span className="text-lg md:text-xl font-semibold tracking-wide animate-marquee">
+          {newsData.length > 0 ? newsData[currentIndex]?.title : "Loading breaking news..."}
+        </span>
+      </div>
     </div>
   );
 };
 
 export default BreakingNewsTicker;
-
-
-
-
-// import React from "react";
-
-// const BreakingNewsTicker = () => {
-//   return (
-//     <div className="p-6">
-
-
-//       {/* ✅ Black Background Div */}
-      
-//     </div>
-//   );
-// };
-
-// export default BreakingNewsTicker;
-
-
-
-
