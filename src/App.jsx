@@ -18,6 +18,8 @@ import Youtube from "./pages/Youtube.jsx";
 import GlobalNews from "./pages/GlobalNews.jsx";
 import StocksNews from "./pages/StocksNews.jsx";
 import CountryNews from "./pages/CountryNews.jsx";
+import Test from "./pages/Test.jsx";
+import SearchQuery from "./pages/SearchQuery.jsx";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
           <Route path="/StocksNews" element={<StocksNews />} />
           <Route path="/GlobalNews" element={<GlobalNews />} />
           <Route path="/CountryNews" element={<CountryNews />} />
+          <Route path="/Test" element={<Test />} />
+          <Route path="/SearchQuery" element={<SearchQuery />} />
           
           
 
