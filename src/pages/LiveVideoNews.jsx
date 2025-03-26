@@ -3,10 +3,16 @@ import { FaHeart, FaComment, FaShare, FaUser, FaArrowLeft, FaPlus, FaBookmark, F
 
 const LiveVideoNews = () => {
   const [videos, setVideos] = useState([
+    { link: "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
+    { link: "https://www.youtube.com/embed/d1tWVnLH67U?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
     { link: "https://www.youtube.com/embed/QxddU3sjVRY?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
     { link: "https://www.youtube.com/embed/IWmmv7T-D7U?enablejsapi=1", title: "Breaking News", description: "Breaking stories from around the world.", username: "worldnews" },
-    { link: "https://www.youtube.com/embed/22F01A4Ayf8?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "trending24" }
+    { link: "https://www.youtube.com/embed/22F01A4Ayf8?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "trending24" },
+    { link: "https://www.youtube.com/embed/LXUb5NlPRhw?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" },
+    { link: "https://www.youtube.com/embed/HYs3izW5bA8?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" },
+    { link: "https://www.youtube.com/embed/lY6TBzcJKAY?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" }
   ]);
+  
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [liked, setLiked] = useState({});
@@ -49,10 +55,11 @@ const LiveVideoNews = () => {
 
   return (
     <div className="relative w-full h-screen bg-black text-white overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-5 py-3 bg-black/70 z-10">
+      <div className="absolute top-0 left-0 right-0 flex items-center px-5 py-3 bg-black/70 z-10">
         <FaArrowLeft className="text-2xl cursor-pointer hover:opacity-80 transition" />
-        <h1 className="text-xl font-bold">Reels</h1>
-        <FaPlus className="text-2xl cursor-pointer hover:opacity-80 transition" />
+        
+        <h1 className="text-xl font-bold "><div>Reels</div></h1>
+       
       </div>
 
       <div ref={videoContainerRef} className="w-full h-full flex flex-col snap-y snap-mandatory overflow-y-scroll scrollbar-hide">
@@ -105,9 +112,7 @@ const LiveVideoNews = () => {
         {videos.map((_, index) => (
           <div key={index} className={`w-2.5 h-2.5 rounded-full ${index === currentIndex ? 'bg-white scale-125' : 'bg-gray-500'}`} />
         ))}
-        
       </div>
-
     </div>
   );
 };
