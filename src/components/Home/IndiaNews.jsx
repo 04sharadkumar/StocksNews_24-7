@@ -45,13 +45,18 @@ const NewsSection = ({ title, icon: Icon, news = [] }) => {
 
 const fetchNews = async (category) => {
   try {
-    const response = await fetch(`https://newsapi.org/v2/top-headlines?category=${category}&country=in&apiKey=29e959f99d8941e1bae06d5c3ca17b61`);
+    const response = await fetch(
+      `https://newsapi.org/v2/top-headlines?category=${category}&country=in&apiKey=29e959f99d8941e1bae06d5c3ca17b61`
+    );
     const data = await response.json();
-    return data.articles.map(article => ({
+
+    console.log(`Fetched news for category: ${category}`, data); // ✅ Console log API response
+
+    return data.articles.map((article) => ({
       title: article.title,
       url: article.url,
       source: article.source.name,
-      image: article.urlToImage || "https://via.placeholder.com/100"
+      image: article.urlToImage || "https://via.placeholder.com/100",
     }));
   } catch (error) {
     console.error("Error fetching news:", error);
@@ -71,14 +76,23 @@ const NewsContainer = () => {
 
   useEffect(() => {
     (async () => {
-      setNewsData({
-        indiaNews: await fetchNews("general"),
-        sportsNews: await fetchNews("sports"),
-        entertainmentNews: await fetchNews("entertainment"),
-        stocksNews: await fetchNews("business"),
-        businessNews: await fetchNews("technology"),
-        worldNews: await fetchNews("world")
-      });
+      const indiaNews = await fetchNews("general");
+      const sportsNews = await fetchNews("sports");
+      const entertainmentNews = await fetchNews("entertainment");
+      const stocksNews = await fetchNews("business");
+      const businessNews = await fetchNews("technology");
+      const worldNews = await fetchNews("world");
+
+      console.log("News Data:", {
+        indiaNews,
+        sportsNews,
+        entertainmentNews,
+        stocksNews,
+        businessNews,
+        worldNews,
+      }); // ✅ Console log all categories data
+
+      setNewsData({ indiaNews, sportsNews, entertainmentNews, stocksNews, businessNews, worldNews });
     })();
   }, []);
 
@@ -88,7 +102,7 @@ const NewsContainer = () => {
         <NewsSection title="Latest News from India" icon={Newspaper} news={newsData.indiaNews} />
       </div>
       <div>
-        <NewsSection title="Sports News" icon={Landmark} news={newsData.sportsNews} />
+        <NewsSection title="World News" icon={Globe} news={newsData.worldNews} />
       </div>
       <div>
         <NewsSection title="Entertainment News" icon={Film} news={newsData.entertainmentNews} />
@@ -100,11 +114,11 @@ const NewsContainer = () => {
         <NewsSection title="Business News" icon={Briefcase} news={newsData.businessNews} />
       </div>
       <div>
-        <NewsSection title="World News" icon={Globe} news={newsData.worldNews} />
-        
+        <NewsSection title="Sports News" icon={Landmark} news={newsData.sportsNews} />
       </div>
     </div>
   );
 };
 
 export default NewsContainer;
+                                

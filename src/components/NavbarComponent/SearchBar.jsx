@@ -6,9 +6,9 @@ const SearchBar = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    if (e.key === "Enter" && query.trim() !== "") {
-      navigate(`/search?q=${query}`);
+  const handleSearch = () => {
+    if (query.trim() !== "") {
+      navigate(`/SearchQuery?q=${query}`);
     }
   };
 
@@ -19,10 +19,13 @@ const SearchBar = () => {
         placeholder="Search news..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleSearch}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         className="bg-gray-900 text-white px-4 py-2 rounded-full w-full md:w-52 border border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all duration-200"
       />
-      <FaSearch className="absolute right-3 top-3 text-gray-400 cursor-pointer" />
+      <FaSearch 
+        className="absolute right-3 top-3 text-gray-400 cursor-pointer"
+        onClick={handleSearch}
+      />
     </div>
   );
 };

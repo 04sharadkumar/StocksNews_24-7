@@ -105,7 +105,9 @@ const LiveVideoNews = () => {
         {videos.map((_, index) => (
           <div key={index} className={`w-2.5 h-2.5 rounded-full ${index === currentIndex ? 'bg-white scale-125' : 'bg-gray-500'}`} />
         ))}
+        
       </div>
+
     </div>
   );
 };
