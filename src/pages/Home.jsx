@@ -61,17 +61,13 @@ const Home = () => {
       <TrendingTopics topics={trendingTopics} />
 
       {/* Featured Video */}
-      <FeaturedVideo />
-
-      
+      <FeaturedVideo />      
 
       {/* country News */}
       <IndiaNews />
 
       {/* Poll Section */}
       <Poll />
-      
-
 
     </div>
   );
