@@ -13,13 +13,13 @@ const LiveVideoNews = () => {
     { 
       id: 1,
       links: {
-        'Auto': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=smallest"
       },
       title: "Breaking News", 
       description: "Live coverage of major global events as they unfold minute by minute.", 
@@ -33,15 +33,16 @@ const LiveVideoNews = () => {
     
     // Technology Category
     { 
+      
       id: 2,
       links: {
-        'Auto': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1",
+        'HD'  : "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/Nq2wYlWFucg?enablejsapi=1&vq=smallest"
       },
       title: "Tech Innovations", 
       description: "Latest tech reveals from CES 2023 - see the future before it happens!", 
@@ -53,17 +54,19 @@ const LiveVideoNews = () => {
       category: "technology"
     },
     
-    // Sports Category
+    // Sports Category 
+    
+    
     { 
       id: 3,
       links: {
-        'Auto': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=smallest"
       },
       title: "Championship Highlights", 
       description: "Relive the most exciting moments from last night's championship game!", 
@@ -79,13 +82,13 @@ const LiveVideoNews = () => {
     { 
       id: 4,
       links: {
-        'Auto': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=smallest"
       },
       title: "Celebrity Interviews", 
       description: "Exclusive backstage interviews with your favorite stars at the awards show.", 
@@ -101,13 +104,13 @@ const LiveVideoNews = () => {
     { 
       id: 5,
       links: {
-        'Auto': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/bcssKkDKASU?enablejsapi=1&vq=smallest"
       },
       title: "Space Exploration", 
       description: "NASA's latest discoveries from the James Webb Space Telescope.", 
@@ -123,13 +126,13 @@ const LiveVideoNews = () => {
     { 
       id: 6,
       links: {
-        'Auto': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/rEKifG2XUZg?enablejsapi=1&vq=smallest"
       },
       title: "5 Minute Recipes", 
       description: "Learn to make delicious meals in just 5 minutes - perfect for busy weeknights!", 
