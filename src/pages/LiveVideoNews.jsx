@@ -1,118 +1,462 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaHeart, FaComment, FaShare, FaUser, FaArrowLeft, FaPlus, FaBookmark, FaEllipsisH } from "react-icons/fa";
+import { 
+  FaHeart, FaComment, FaShare, FaUser, FaArrowLeft, 
+  FaBookmark, FaEllipsisH, FaVolumeUp, FaVolumeMute,
+  FaClosedCaptioning
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const LiveVideoNews = () => {
-  const [videos, setVideos] = useState([
-    { link: "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
-    { link: "https://www.youtube.com/embed/d1tWVnLH67U?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
-    { link: "https://www.youtube.com/embed/QxddU3sjVRY?enablejsapi=1", title: "Latest News Update", description: "Stay updated with the latest news.", username: "newsdaily" },
-    { link: "https://www.youtube.com/embed/IWmmv7T-D7U?enablejsapi=1", title: "Breaking News", description: "Breaking stories from around the world.", username: "worldnews" },
-    { link: "https://www.youtube.com/embed/22F01A4Ayf8?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "trending24" },
-    { link: "https://www.youtube.com/embed/LXUb5NlPRhw?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" },
-    { link: "https://www.youtube.com/embed/HYs3izW5bA8?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" },
-    { link: "https://www.youtube.com/embed/lY6TBzcJKAY?enablejsapi=1", title: "Trending Now", description: "Most trending news today.", username: "cartoon" }
+  
+  const [videos] = useState([
+    // News Category
+    { 
+      id: 1,
+      links: {
+        'Auto': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/UDmxooFKjlU?enablejsapi=1&vq=smallest"
+      },
+      title: "Breaking News", 
+      description: "Live coverage of major global events as they unfold minute by minute.", 
+      username: "global_news",
+      likes: 245600,
+      comments: 4200,
+      shares: 3200,
+      captions: true,
+      category: "news"
+    },
+    
+    // Technology Category
+    { 
+      id: 2,
+      links: {
+        'Auto': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/9No-FiEInLA?enablejsapi=1&vq=smallest"
+      },
+      title: "Tech Innovations", 
+      description: "Latest tech reveals from CES 2023 - see the future before it happens!", 
+      username: "tech_today",
+      likes: 189300,
+      comments: 5300,
+      shares: 4100,
+      captions: true,
+      category: "technology"
+    },
+    
+    // Sports Category
+    { 
+      id: 3,
+      links: {
+        'Auto': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/oygrmJFKYZY?enablejsapi=1&vq=smallest"
+      },
+      title: "Championship Highlights", 
+      description: "Relive the most exciting moments from last night's championship game!", 
+      username: "sports_central",
+      likes: 321800,
+      comments: 8900,
+      shares: 6700,
+      captions: false,
+      category: "sports"
+    },
+    
+    // Entertainment Category
+    { 
+      id: 4,
+      links: {
+        'Auto': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&vq=smallest"
+      },
+      title: "Celebrity Interviews", 
+      description: "Exclusive backstage interviews with your favorite stars at the awards show.", 
+      username: "entertainment_now",
+      likes: 178500,
+      comments: 6200,
+      shares: 3800,
+      captions: true,
+      category: "entertainment"
+    },
+    
+    // Science Category
+    { 
+      id: 5,
+      links: {
+        'Auto': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/XGK84Poeynk?enablejsapi=1&vq=smallest"
+      },
+      title: "Space Exploration", 
+      description: "NASA's latest discoveries from the James Webb Space Telescope.", 
+      username: "science_daily",
+      likes: 156200,
+      comments: 3400,
+      shares: 2900,
+      captions: true,
+      category: "science"
+    },
+    
+    // Cooking Category
+    { 
+      id: 6,
+      links: {
+        'Auto': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/BPjQzL7FgE8?enablejsapi=1&vq=smallest"
+      },
+      title: "5 Minute Recipes", 
+      description: "Learn to make delicious meals in just 5 minutes - perfect for busy weeknights!", 
+      username: "quick_cooking",
+      likes: 98700,
+      comments: 2100,
+      shares: 1500,
+      captions: false,
+      category: "cooking"
+    }
   ]);
   
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [liked, setLiked] = useState({});
-  const [saved, setSaved] = useState({});
+  const [interactions, setInteractions] = useState(() => 
+    videos.reduce((acc, video) => ({
+      ...acc,
+      [video.id]: { liked: false, saved: false }
+    }), {})
+  );
+  const [videoSettings, setVideoSettings] = useState({
+    muted: true,
+    captions: false,
+    quality: 'Auto',
+    showQualityMenu: false
+  });
+  
   const videoRefs = useRef([]);
   const videoContainerRef = useRef(null);
+  const scrollTimeoutRef = useRef(null);
+  const touchStartY = useRef(0);
 
+  // Format large numbers
+  const formatNumber = (num) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  };
+
+  // Handle wheel navigation
   useEffect(() => {
     const handleWheel = (e) => {
-      if (videoContainerRef.current && videoContainerRef.current.contains(e.target)) {
+      if (videoContainerRef.current?.contains(e.target)) {
         e.preventDefault();
-        setCurrentIndex((prev) => {
-          let newIndex = e.deltaY > 0 
-            ? Math.min(prev + 1, videos.length - 1) 
-            : Math.max(prev - 1, 0);
-          return newIndex;
-        });
+        
+        if (scrollTimeoutRef.current) {
+          clearTimeout(scrollTimeoutRef.current);
+        }
+        
+        scrollTimeoutRef.current = setTimeout(() => {
+          setCurrentIndex(prev => {
+            const direction = e.deltaY > 0 ? 1 : -1;
+            return Math.min(Math.max(prev + direction, 0), videos.length - 1);
+          });
+        }, 150);
       }
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, [videos.length]);
 
+  // Handle touch events for mobile
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+    
+    const handleTouchEnd = (e) => {
+      const endY = e.changedTouches[0].clientY;
+      const diff = touchStartY.current - endY;
+      
+      if (Math.abs(diff) > 50) {
+        setCurrentIndex(prev => {
+          return diff > 0 
+            ? Math.min(prev + 1, videos.length - 1)
+            : Math.max(prev - 1, 0);
+        });
+      }
+    };
+
+    const container = videoContainerRef.current;
+    if (container) {
+      container.addEventListener('touchstart', handleTouchStart, { passive: false });
+      container.addEventListener('touchend', handleTouchEnd, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('touchstart', handleTouchStart);
+        container.removeEventListener('touchend', handleTouchEnd);
+      }
+    };
+  }, [videos.length]);
+
+  // Video management
   useEffect(() => {
     videoRefs.current.forEach((iframe, index) => {
       if (iframe && iframe.contentWindow) {
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        if (index !== currentIndex) {
+          // Pause all other videos
+          iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        } else {
+          // Configure current video
+          const settings = [
+            `{"event":"command","func":"${videoSettings.muted ? 'mute' : 'unMute'}","args":""}`,
+            `{"event":"command","func":"setPlaybackQuality","args":"${videoSettings.quality}"}`,
+            `{"event":"command","func":"${videoSettings.captions ? 'showCaptions' : 'hideCaptions'}","args":""}`,
+            '{"event":"command","func":"playVideo","args":""}'
+          ];
+          
+          settings.forEach(setting => {
+            iframe.contentWindow.postMessage(setting, '*');
+          });
+        }
       }
     });
-  }, [currentIndex]);
+  }, [currentIndex, videoSettings]);
 
-  const toggleLike = (index) => {
-    setLiked((prev) => ({ ...prev, [index]: !prev[index] }));
+  const toggleInteraction = (videoId, type) => {
+    setInteractions(prev => ({
+      ...prev,
+      [videoId]: {
+        ...prev[videoId],
+        [type]: !prev[videoId][type]
+      }
+    }));
   };
 
-  const toggleSave = (index) => {
-    setSaved((prev) => ({ ...prev, [index]: !prev[index] }));
+  const toggleSetting = (setting) => {
+    setVideoSettings(prev => ({ ...prev, [setting]: !prev[setting] }));
+  };
+
+  const changeQuality = (quality) => {
+    setVideoSettings(prev => ({ ...prev, quality, showQualityMenu: false }));
   };
 
   return (
-    <div className="relative w-full h-screen bg-black text-white overflow-hidden">
-      <div className="absolute top-0 left-0 right-0 flex items-center px-5 py-3 bg-black/70 z-10">
-        <FaArrowLeft className="text-2xl cursor-pointer hover:opacity-80 transition" />
-        
-        <h1 className="text-xl font-bold "><div>Reels</div></h1>
-       
-      </div>
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+      {/* Header */}
+      <header className="absolute top-0 left-0 right-0 flex items-center px-4 py-3 bg-gradient-to-b from-black/80 to-transparent z-20">
+        <Link 
+          to="/" 
+          className="flex items-center gap-2 group"
+          aria-label="Go back"
+        >
+          <FaArrowLeft className="text-xl text-white group-hover:text-gray-300 transition-colors" />
+          <h1 className="text-xl font-bold text-white">News Reels</h1>
+        </Link>
+      </header>
 
-      <div ref={videoContainerRef} className="w-full h-full flex flex-col snap-y snap-mandatory overflow-y-scroll scrollbar-hide">
+      {/* Video Container */}
+      <div 
+        ref={videoContainerRef} 
+        className="w-full h-full snap-y snap-mandatory overflow-y-scroll scrollbar-hide"
+      >
         {videos.map((video, index) => (
-          <div key={index} className="w-full h-full flex-shrink-0 snap-start relative flex items-center justify-center">
-            <iframe
-              ref={(el) => (videoRefs.current[index] = el)}
-              className="w-full h-full max-w-xl aspect-[9/16] object-cover rounded-xl shadow-2xl border border-gray-800"
-              src={`${video.link}&vq=hd720`}
-              title={video.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+          <section 
+            key={video.id}
+            className="w-full h-full snap-start relative flex items-center justify-center"
+          >
+            {/* Video Player */}
+            <div className="relative w-full h-full max-w-md">
+              <iframe
+                ref={(el) => (videoRefs.current[index] = el)}
+                className="absolute inset-0 w-full h-full"
+                src={`${video.links[videoSettings.quality]}&autoplay=${index === currentIndex ? 1 : 0}&mute=${videoSettings.muted ? 1 : 0}&controls=0&modestbranding=1&rel=0`}
+                title={video.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+              
+              {/* Video Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+            </div>
 
-            <div className="absolute bottom-0 left-0 right-0 px-5 py-6 bg-gradient-to-t from-black via-black/60 to-transparent">
-              <div className="flex items-center gap-3 mb-2">
-                <FaUser className="text-lg" />
-                <span className="text-base font-semibold">@{video.username}</span>
-                <button className="ml-2 px-4 py-1 text-sm border border-white rounded-full hover:bg-white hover:text-black transition">Follow</button>
+            {/* Video Info */}
+            <div className="absolute bottom-0 left-0 right-0 px-4 pb-6 z-10">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
+                  <FaUser className="text-gray-300" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-semibold text-white">@{video.username}</span>
+                    <button 
+                      className="px-3 py-0.5 text-xs font-medium border border-white/50 rounded-full text-white hover:bg-white/10 transition-colors"
+                      aria-label={`Follow ${video.username}`}
+                    >
+                      Follow
+                    </button>
+                  </div>
+                  <p className="text-sm text-gray-200 mt-1">{video.description}</p>
+                </div>
               </div>
-              <p className="text-sm md:text-base text-gray-300">{video.description}</p>
             </div>
 
-            <div className="absolute right-5 bottom-24 flex flex-col gap-6 items-center">
-              <button onClick={() => toggleLike(index)} className="flex flex-col items-center hover:scale-110 transition">
-                <FaHeart size={28} className={`${liked[index] ? "text-red-500" : "text-white"}`} />
-                <span className="text-xs mt-1">120k</span>
+            {/* Right Side Controls */}
+            <div className="absolute right-4 bottom-24 flex flex-col gap-5 items-center z-10">
+              <button 
+                onClick={() => toggleInteraction(video.id, 'liked')}
+                className="flex flex-col items-center group"
+                aria-label={interactions[video.id]?.liked ? "Unlike" : "Like"}
+              >
+                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                  <FaHeart 
+                    size={24} 
+                    className={interactions[video.id]?.liked ? "text-red-500" : "text-white"} 
+                  />
+                </div>
+                <span className="text-xs text-white mt-1">
+                  {formatNumber(video.likes + (interactions[video.id]?.liked ? 1 : 0))}
+                </span>
               </button>
-              <button className="flex flex-col items-center hover:scale-110 transition">
-                <FaComment size={28} className="text-white" />
-                <span className="text-xs mt-1">2.3k</span>
+              
+              <button 
+                className="flex flex-col items-center group"
+                aria-label="Comment"
+              >
+                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                  <FaComment size={24} className="text-white" />
+                </div>
+                <span className="text-xs text-white mt-1">{formatNumber(video.comments)}</span>
               </button>
-              <button className="flex flex-col items-center hover:scale-110 transition">
-                <FaShare size={28} className="text-white" />
-                <span className="text-xs mt-1">1.5k</span>
+              
+              <button 
+                className="flex flex-col items-center group"
+                aria-label="Share"
+              >
+                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                  <FaShare size={24} className="text-white" />
+                </div>
+                <span className="text-xs text-white mt-1">{formatNumber(video.shares)}</span>
               </button>
-              <button onClick={() => toggleSave(index)} className="flex flex-col items-center hover:scale-110 transition">
-                <FaBookmark size={28} className={`${saved[index] ? "text-yellow-400" : "text-white"}`} />
+              
+              <button 
+                onClick={() => toggleInteraction(video.id, 'saved')}
+                className="flex flex-col items-center group"
+                aria-label={interactions[video.id]?.saved ? "Unsave" : "Save"}
+              >
+                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                  <FaBookmark 
+                    size={24} 
+                    className={interactions[video.id]?.saved ? "text-yellow-400" : "text-white"} 
+                  />
+                </div>
               </button>
-              <button className="flex flex-col items-center hover:scale-110 transition">
-                <FaEllipsisH size={28} className="text-white" />
+              
+              {/* Sound Toggle */}
+              <button 
+                onClick={() => toggleSetting('muted')}
+                className="flex flex-col items-center group"
+                aria-label={videoSettings.muted ? "Unmute" : "Mute"}
+              >
+                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                  {videoSettings.muted ? (
+                    <FaVolumeMute size={24} className="text-white" />
+                  ) : (
+                    <FaVolumeUp size={24} className="text-white" />
+                  )}
+                </div>
               </button>
+              
+              {/* Captions Toggle (if available) */}
+              {video.captions && (
+                <button 
+                  onClick={() => toggleSetting('captions')}
+                  className="flex flex-col items-center group"
+                  aria-label={videoSettings.captions ? "Hide captions" : "Show captions"}
+                >
+                  <div className={`p-2 rounded-full group-hover:bg-white/10 transition-colors ${videoSettings.captions ? 'text-blue-400' : 'text-white'}`}>
+                    <FaClosedCaptioning size={24} />
+                  </div>
+                </button>
+              )}
+              
+              {/* Quality Selector */}
+              <div className="relative">
+                <button 
+                  onClick={() => toggleSetting('showQualityMenu')}
+                  className="flex flex-col items-center group"
+                  aria-label="Video quality options"
+                >
+                  <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
+                    <div className="w-6 h-6 flex items-center justify-center">
+                      <span className="text-xs font-medium text-white">{videoSettings.quality}</span>
+                    </div>
+                  </div>
+                </button>
+                
+                {videoSettings.showQualityMenu && (
+                  <div className="absolute bottom-full right-0 mb-2 w-24 bg-black/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-xl z-20">
+                    {['Auto', 'HD', '720p', '480p', '360p', '240p', '144p'].map(quality => (
+                      <button
+                      key={quality}
+                      onClick={() => changeQuality(quality)}
+                      className={`w-full px-3 py-2 text-left text-sm ${videoSettings.quality === quality ? 'bg-blue-500 text-white' : 'text-gray-200 hover:bg-gray-700'}`}>
+                      {quality}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          </section>
         ))}
       </div>
 
-      <div className="absolute right-5 top-1/2 transform -translate-y-1/2 flex flex-col gap-3">
+      {/* Navigation Indicators */}
+      <nav className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-10">
         {videos.map((_, index) => (
-          <div key={index} className={`w-2.5 h-2.5 rounded-full ${index === currentIndex ? 'bg-white scale-125' : 'bg-gray-500'}`} />
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all ${index === currentIndex ? 'bg-white scale-125' : 'bg-gray-500 hover:bg-gray-400'}`}
+            aria-label={`Go to video ${index + 1}`}
+          />
         ))}
-      </div>
+      </nav>
     </div>
   );
 };
