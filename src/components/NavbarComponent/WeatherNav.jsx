@@ -60,7 +60,7 @@ import {
   MapPin, Moon
 } from "lucide-react";
 
-const WeatherWidget = () => {
+const WeatherNav = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -299,4 +299,4 @@ const StatCard = ({ Icon, label, value, theme }) => (
   </div>
 );
 
-export default WeatherWidget;
+export default WeatherNav;

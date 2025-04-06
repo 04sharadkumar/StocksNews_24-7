@@ -55,7 +55,8 @@ const Home = () => {
       <HeroNews currentNews={newsData[currentNewsIndex]} />
 
       {/* Weather Widget */}
-      <WeatherWidget />
+      {/* <WeatherWidget /> */}
+      
 
       {/* Trending Topics */}
       <TrendingTopics topics={trendingTopics} />

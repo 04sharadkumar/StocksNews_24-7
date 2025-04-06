@@ -1,34 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
-import { 
-  FaHeart, FaComment, FaShare, FaUser, FaArrowLeft, 
-  FaBookmark, FaEllipsisH, FaVolumeUp, FaVolumeMute,
-  FaClosedCaptioning
-} from "react-icons/fa";
+import { FaHeart, FaUser, FaArrowLeft, FaBookmark, FaVolumeUp, FaVolumeMute,FaClosedCaptioning} from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LiveVideoNews = () => {
-  
+  const [count,setCount] = useState(100)
   const [videos] = useState([
-    // News Category
+    
     { 
       id: 1,
       links: {
-        'Auto': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1",
-        'HD': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=hd1080",
-        '720p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=hd720",
-        '480p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=medium",
-        '360p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=small",
-        '240p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=tiny",
-        '144p': "https://www.youtube.com/embed/d8y3anhieho?enablejsapi=1&vq=smallest"
+        'Auto': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1",
+        'HD': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=hd1080",
+        '720p': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=hd720",
+        '480p': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=medium",
+        '360p': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=small",
+        '240p': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=tiny",
+        '144p': "https://www.youtube.com/embed/xRPjKQtRXR8?enablejsapi=1&vq=smallest"
       },
-      title: "Breaking News", 
-      description: "Live coverage of major global events as they unfold minute by minute.", 
-      username: "global_news",
-      likes: 245600,
-      comments: 4200,
-      shares: 3200,
+      title: "NASA LIVE STREAM", 
+      description: "This is an ISS live earth view happening right now from space at the International Space Station.", 
+      username: "Nasa",
       captions: true,
-      category: "news"
+      category: "ScienceTv"
     },
     
     // Technology Category
@@ -46,7 +39,7 @@ const LiveVideoNews = () => {
       },
       title: "Tech Innovations", 
       description: "Latest tech reveals from CES 2023 - see the future before it happens!", 
-      username: "tech_today",
+      username: "Ajj Tak",
       likes: 189300,
       comments: 5300,
       shares: 4100,
@@ -68,12 +61,9 @@ const LiveVideoNews = () => {
         '240p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=tiny",
         '144p': "https://www.youtube.com/embed/wRugKdhD2Bg?enablejsapi=1&vq=smallest"
       },
-      title: "Championship Highlights", 
+      title: "", 
       description: "Relive the most exciting moments from last night's championship game!", 
-      username: "sports_central",
-      likes: 321800,
-      comments: 8900,
-      shares: 6700,
+      username: "NEWS24",
       captions: false,
       category: "sports"
     },
@@ -92,7 +82,7 @@ const LiveVideoNews = () => {
       },
       title: "Celebrity Interviews", 
       description: "Exclusive backstage interviews with your favorite stars at the awards show.", 
-      username: "entertainment_now",
+      username: "CNBC_Tv18",
       likes: 178500,
       comments: 6200,
       shares: 3800,
@@ -114,7 +104,7 @@ const LiveVideoNews = () => {
       },
       title: "Space Exploration", 
       description: "NASA's latest discoveries from the James Webb Space Telescope.", 
-      username: "science_daily",
+      username: "Lofi_Music",
       likes: 156200,
       comments: 3400,
       shares: 2900,
@@ -136,7 +126,7 @@ const LiveVideoNews = () => {
       },
       title: "5 Minute Recipes", 
       description: "Learn to make delicious meals in just 5 minutes - perfect for busy weeknights!", 
-      username: "quick_cooking",
+      username: "CartoonNetwork",
       likes: 98700,
       comments: 2100,
       shares: 1500,
@@ -348,33 +338,21 @@ const LiveVideoNews = () => {
                 <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
                   <FaHeart 
                     size={24} 
-                    className={interactions[video.id]?.liked ? "text-red-500" : "text-white"} 
+                    className={interactions[video.id]?.liked ? "text-red-500" : "text-white"}
+
+                    onClick={()=>{
+                      if (!interactions[video.id]?.liked) {
+                        setCount(count+1)
+                        
+                      }
+                    }} 
                   />
                 </div>
                 <span className="text-xs text-white mt-1">
-                  {formatNumber(video.likes + (interactions[video.id]?.liked ? 1 : 0))}
+                  <p>{count}k</p>
                 </span>
               </button>
-              
-              <button 
-                className="flex flex-col items-center group"
-                aria-label="Comment"
-              >
-                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
-                  <FaComment size={24} className="text-white" />
-                </div>
-                <span className="text-xs text-white mt-1">{formatNumber(video.comments)}</span>
-              </button>
-              
-              <button 
-                className="flex flex-col items-center group"
-                aria-label="Share"
-              >
-                <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
-                  <FaShare size={24} className="text-white" />
-                </div>
-                <span className="text-xs text-white mt-1">{formatNumber(video.shares)}</span>
-              </button>
+                         
               
               <button 
                 onClick={() => toggleInteraction(video.id, 'saved')}
@@ -384,7 +362,7 @@ const LiveVideoNews = () => {
                 <div className="p-2 rounded-full group-hover:bg-white/10 transition-colors">
                   <FaBookmark 
                     size={24} 
-                    className={interactions[video.id]?.saved ? "text-yellow-400" : "text-white"} 
+                    className={interactions[video.id]?.saved ? "text-blue-400" : "text-white"} 
                   />
                 </div>
               </button>
