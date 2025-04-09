@@ -158,7 +158,7 @@ const WeatherNav = () => {
   };
 
   return (
-    <div className={`min-h-screen w-full p-4 transition-colors duration-300 mt-10 ${
+    <div className={`min-h-screen w-full p-4 transition-colors duration-300  ${
       theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
     }`}>
       <div className={`w-full max-w-2xl mx-auto rounded-2xl shadow-xl overflow-hidden border mt-10 ${

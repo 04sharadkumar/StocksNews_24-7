@@ -2,6 +2,11 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { toast } from 'react-toastify';
+
+//logoout ke liye hy ye
+import { useAuth } from "@/Auth/AuthContext"; 
+import { useNavigate } from "react-router-dom";
+
 import LoginModal from "./LoginModel"; // Import Login Modal
 
 const UserDropdown = () => {
@@ -10,17 +15,25 @@ const UserDropdown = () => {
   const dropdownRef = useRef(null);
 
   const handleLogout = () => {
-    setIsDropdownOpen(false);
+    setIsDropdownOpen(false); // Close dropdown if it's open
+
+    logout(); // Call logout function from AuthContext
+    localStorage.removeItem("profileData"); // Remove user profile data
+    localStorage.removeItem("profileImage"); // Remove profile image
+    navigate("/login"); // Redirect to login page
+
+    // Show success toast notification
     toast.success("Logged Out Successfully!", {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "dark",
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
     });
-  };
+};
+
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -32,6 +45,12 @@ const UserDropdown = () => {
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
+
+  //logout le liye 
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  
 
   return (
     <div className="relative" ref={dropdownRef}>

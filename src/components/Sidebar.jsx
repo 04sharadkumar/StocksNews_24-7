@@ -1,7 +1,12 @@
 import { useSidebar } from "../SidebarProvider/SidebarProvider";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt } from "react-icons/fa"; // Icons
+import { FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt  } from "react-icons/fa"; // Icons
+import { IoMdLogOut } from "react-icons/io";
+import { toast } from 'react-toastify';
+//logoout ke liye hy ye
+import { useAuth } from "../Auth/AuthContext" 
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const { open, setOpen } = useSidebar(); // Get state from context
@@ -9,6 +14,25 @@ export default function Sidebar() {
   // Function to close sidebar on link click
   const closeSidebar = () => {
     setOpen(false);
+  };
+    const handleLogout = () => {
+      setIsDropdownOpen(false); // Close dropdown if it's open
+  
+      logout(); // Call logout function from AuthContext
+      localStorage.removeItem("profileData"); // Remove user profile data
+      localStorage.removeItem("profileImage"); // Remove profile image
+      navigate("/login"); // Redirect to login page
+  
+      // Show success toast notification
+      toast.success("Logged Out Successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+      });
   };
 
   return (
@@ -60,6 +84,18 @@ export default function Sidebar() {
           </li>
 
           {/* New */}
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+          <IoMdLogOut size={32} />
+            <button>
+            <Link 
+            to="/" 
+            className="block px-4 py-2 text-red-500 hover:bg-gray-100" 
+            onClick={handleLogout}
+          >
+            Logout
+          </Link>
+            </button>
+          </li>
          
           
           

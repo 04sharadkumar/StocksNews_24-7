@@ -1,63 +1,100 @@
 import { useState } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/Auth/AuthContext";
 
-export default function Login() {
-  const [darkMode, setDarkMode] = useState(true);
-  const [formData, setFormData] = useState({ username: "", password: "" });
 
-  const toggleTheme = () => setDarkMode(!darkMode);
+const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const { login } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Details:", formData);
-  };
-
-  return (
-    <div className={`flex h-screen items-center justify-center transition-all duration-500 ${darkMode ? "bg-black text-white" : "bg-white text-black"}`}>
-      <div className="p-8 w-96 rounded-lg shadow-lg border border-gray-500">
-        <h2 className="text-2xl font-bold text-center">Login</h2>
+    const handleLogin = async (e) => {
+        e.preventDefault();
         
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <div>
-            <label className="block mb-1">Username</label>
-            <input 
-              type="text" 
-              name="username" 
-              value={formData.username} 
-              onChange={handleChange} 
-              className="w-full px-4 py-2 border rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
-              required
-            />
-          </div>
+        setError(""); // Reset error state
 
-          <div>
-            <label className="block mb-1">Password</label>
-            <input 
-              type="password" 
-              name="password" 
-              value={formData.password} 
-              onChange={handleChange} 
-              className="w-full px-4 py-2 border rounded bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-600"
-              required
-            />
-          </div>
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+                
+                
+            });
 
-          <button 
-            type="submit" 
-            className="w-full py-2 mt-2 bg-gray-800 hover:bg-gray-700 transition text-white font-semibold rounded">
-            Sign In
-          </button>
-        </form>
+            const data = await response.json();
+            console.log(data)
 
-        <button 
-          onClick={toggleTheme} 
-          className="mt-4 w-full py-2 border border-gray-500 text-sm text-center rounded hover:bg-gray-700 transition">
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        </button>
-      </div>
-    </div>
-  );
-}
+            if (!response.ok) {
+                setError(data.message || "Login failed. Please try again.");
+                return;
+            }
+
+            // Save token & user info
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            localStorage.setItem("userId", data.user._id); //store the user data with token or id
+
+            // Update AuthContext
+            login(data.user);
+
+            // Redirect to previous or home page
+            navigate(location.state?.from || "/");
+
+        } catch (error) {
+            console.log("🚨 Login Error:", error);
+            setError("Server error. Please try again.");
+        }
+    };
+
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-white">
+            <div className="w-full max-w-sm h-[65vh] bg-white p-8 rounded-xl shadow-lg border border-black flex flex-col justify-center">
+                <h2 className="text-2xl font-bold text-center text-black mb-6">Login</h2>
+
+                {error && <p className="text-red-600 text-center">{error}</p>}
+
+                <form onSubmit={handleLogin} className="space-y-5">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full p-3 border border-black rounded-md focus:ring-2 focus:ring-black placeholder-gray-500"
+                        required
+                    />
+
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full p-3 border border-black rounded-md focus:ring-2 focus:ring-black placeholder-gray-500"
+                        required
+                    />
+
+                    <button
+                        type="submit"
+                        className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-900 transition duration-300"
+                    >
+                        Login
+                    </button>
+
+                    <p className="text-center text-gray-700">
+                        Don't have an account?{" "}
+                        <Link to="/SignUp" className="text-black font-semibold hover:underline">
+                            Sign up
+                        </Link>
+                    </p>
+                </form>
+               
+            </div>
+            
+        </div>
+    );
+};
+
+export default Login;

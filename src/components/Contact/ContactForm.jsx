@@ -1,25 +1,49 @@
-// components/ContactForm.js
 import { useState } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { Send } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ContactForm() {
   const [step, setStep] = useState(1);
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", mobile: "", message: "" },
-    validationSchema: Yup.object({
-      name: Yup.string().min(3, "Name must be at least 3 characters").required("Name is required"),
-      email: Yup.string().email("Invalid email address").required("Email is required"),
-      mobile: Yup.string()
-        .matches(/^[0-9]{10}$/, "Mobile number must be 10 digits")
-        .required("Mobile number is required"),
-      message: Yup.string().min(10, "Message should be at least 10 characters").required("Message is required"),
-    }),
-    onSubmit: (values) => {
-      alert("Thank you for reaching out! We will get back to you soon.");
-      setStep(1); // Reset to step 1 after submission
+    initialValues: {
+      name: "",
+      email: "",
+      mobile: "",
+      message: "",
+    },
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const response = await fetch("http://localhost:5000/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        });
+
+        if (!response.ok) {
+          toast.error("Something went wrong!", {
+            position: "top-right",
+            theme: "colored",
+          });
+          throw new Error("Failed to submit form");
+        }
+
+        resetForm();
+        setStep(1);
+
+        toast.success("Message sent successfully!", {
+          position: "bottom-left",
+          theme: "dark",
+        });
+
+      } catch (error) {
+        console.error("Form submission error:", error);
+        // Already handled above
+      }
     },
   });
 
@@ -30,7 +54,6 @@ export default function ContactForm() {
       </h2>
 
       <form onSubmit={formik.handleSubmit} className="space-y-6">
-        {/* Step 1: User Information */}
         {step === 1 && (
           <>
             <div>
@@ -39,15 +62,9 @@ export default function ContactForm() {
                 name="name"
                 value={formik.values.name}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 placeholder="Your Name"
-                className={`w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                  formik.touched.name && formik.errors.name ? "border-red-500" : ""
-                }`}
+                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
-              {formik.touched.name && formik.errors.name && (
-                <p className="text-red-500 text-sm">{formik.errors.name}</p>
-              )}
             </div>
             <div>
               <input
@@ -55,15 +72,9 @@ export default function ContactForm() {
                 name="email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 placeholder="Your Email"
-                className={`w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                  formik.touched.email && formik.errors.email ? "border-red-500" : ""
-                }`}
+                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
-              {formik.touched.email && formik.errors.email && (
-                <p className="text-red-500 text-sm">{formik.errors.email}</p>
-              )}
             </div>
             <div>
               <input
@@ -71,15 +82,9 @@ export default function ContactForm() {
                 name="mobile"
                 value={formik.values.mobile}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 placeholder="Your Mobile Number"
-                className={`w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                  formik.touched.mobile && formik.errors.mobile ? "border-red-500" : ""
-                }`}
+                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
-              {formik.touched.mobile && formik.errors.mobile && (
-                <p className="text-red-500 text-sm">{formik.errors.mobile}</p>
-              )}
             </div>
             <div className="flex justify-between items-center">
               <button
@@ -93,7 +98,6 @@ export default function ContactForm() {
           </>
         )}
 
-        {/* Step 2: Message */}
         {step === 2 && (
           <>
             <div>
@@ -101,28 +105,22 @@ export default function ContactForm() {
                 name="message"
                 value={formik.values.message}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
                 rows="5"
                 placeholder="Your Message"
-                className={`w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                  formik.touched.message && formik.errors.message ? "border-red-500" : ""
-                }`}
+                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
               ></textarea>
-              {formik.touched.message && formik.errors.message && (
-                <p className="text-red-500 text-sm">{formik.errors.message}</p>
-              )}
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-wrap gap-4">
               <button
                 type="submit"
-                className="w-full sm:w-auto bg-blue-600 text-white p-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
+                className="w-full sm:w-auto bg-blue-600 text-white p-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center gap-2"
               >
                 <Send className="w-6 h-6" /> Send Message
               </button>
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="w-full sm:w-auto bg-gray-300 text-black p-4 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300 mt-4 sm:mt-0"
+                className="w-full sm:w-auto bg-gray-300 text-black p-4 rounded-lg text-lg font-semibold hover:bg-gray-400 transition duration-300"
               >
                 Back
               </button>
@@ -130,6 +128,9 @@ export default function ContactForm() {
           </>
         )}
       </form>
+
+      {/* ToastContainer outside the form, once only */}
+      <ToastContainer autoClose={3000} />
     </div>
   );
 }

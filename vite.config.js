@@ -14,4 +14,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"), // Define @ alias
     },
   },
+  // server: {
+  //   proxy: {
+  //     '/api': 'http://localhost:5000',  // Proxy to your backend server running on port 5000
+  //   }
+  //   },
 })
