@@ -11,6 +11,16 @@ import SettingsPage from "./pages/Profile/SettingPage.jsx";
 import Login from "./pages/Profile/Login.jsx";
 import SignUp from "./pages/Profile/SignUp.jsx";
 
+
+// Admin Setup
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import AddNews from "./pages/admin/AddNews.jsx";
+import AdminLayout from "./components/AdminLayout.jsx";
+import Settings from "./pages/admin/Setting.jsx";
+import ManageUsers from "./pages/admin/ManageUsers.jsx";
+import ViewArticles from "./pages/admin/ViewArticles.jsx"; 
+
+
 // Example Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -28,28 +38,18 @@ import WeatherNav from "./components/NavbarComponent/WeatherNav.jsx";
 // login 
 import { AuthProvider } from "./Auth/AuthContext.jsx";
 import ProtectedRoute from "./Auth/ProtectedRoute.jsx";
-import axios from "axios";
-import { useEffect, useState } from "react";
-//Theme
-import { ThemeProvider } from "./context/ThemeContext.jsx";
+
 
 function App() {
-  const [message, setMessage] = useState("Loading...");
-
-  useEffect(() => {
-    axios.get("/api/message")
-      .then((response) => setMessage(response.data.message))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
   return (
-    <ThemeProvider>
+    
     <AuthProvider>
       <BrowserRouter>
         <SidebarProvider>
           <Navbar />
           <Sidebar />
-          <p>{message}</p>
+         
 
           {/* ✅ Render Routes */}
           <AppRoutes />
@@ -59,7 +59,7 @@ function App() {
         </SidebarProvider>
       </BrowserRouter>
     </AuthProvider>
-    </ThemeProvider>
+    
   );
 }
 
@@ -77,7 +77,14 @@ function AppRoutes() {
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/WeatherNav" element={<WeatherNav />} />
-
+      {/* admin routes  */}
+      <Route path="/admin" element={<AdminLayout />}>
+           <Route path="dashboard" element={<AdminDashboard />} />
+           <Route path="addNews" element={<AddNews />} />   
+           <Route path="viewArticles" element={<ViewArticles />} />
+           <Route path="manageUsers" element={<ManageUsers />} />
+           <Route path="settings" element={<Settings />} />
+      </Route>
       {/* 🔒 Protected Routes */}
       <Route path="/ProfilePage" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/SettingPage" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
@@ -94,12 +101,20 @@ function AppRoutes() {
 // ✅ Conditional Layout: Hide Footer & Bottom Navbar on `/LiveVideoNews`
 function ConditionalLayout() {
   const location = useLocation();
-  return location.pathname !== "/LiveVideoNews" ? (
+
+  const hideRoutes = ["/LiveVideoNews"];
+
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  const shouldHideLayout = isAdminRoute || hideRoutes.includes(location.pathname);
+
+  return !shouldHideLayout ? (
     <>
       <BottomNav />
       <Footer />
     </>
   ) : null;
 }
+
 
 export default App;

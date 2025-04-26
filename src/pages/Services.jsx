@@ -123,7 +123,7 @@ export default function Services() {
   animate={{ opacity: 1 }} 
   transition={{ duration: 1 }}
 >
-  <h1 className="text-5xl font-extrabold">
+  <h1 className="text-5xl font-extrabold text-gray-800">
     Our <span className="text-red-500">Services</span>
   </h1>
   <p className="text-lg text-gray-700 mt-3">
@@ -194,14 +194,14 @@ export default function Services() {
 
       {/* Subscription & Notification Settings */}
       <div className="container mx-auto px-6 py-12">
-  <div className="bg-blue-200 p-10 rounded-lg shadow-lg text-center">
-    <h2 className="text-3xl font-bold mb-4 text-gray-900">📩 Stay Updated</h2>
-    <p className="text-gray-600 mb-4">
+  <div className="bg-blue-200  rounded-lg shadow-lg text-center">
+    {/* <h2 className="text-3xl font-bold mb-4 text-gray-900">📩 Stay Updated</h2> */}
+    {/* <p className="text-gray-600 mb-4">
       Subscribe to get personalized news alerts directly to your inbox.
-    </p>
+    </p> */}
 
     {/* Subscription Type Buttons */}
-    <div className="flex justify-center gap-4 mb-6">
+    {/* <div className="flex justify-center gap-4 mb-6">
       {["Daily", "Weekly", "Breaking Alerts"].map((type) => (
         <button
           key={type}
@@ -210,10 +210,10 @@ export default function Services() {
           {type}
         </button>
       ))}
-    </div>
+    </div> */}
 
     {/* Email Subscription Box */}
-    <div className="flex justify-center">
+    {/* <div className="flex justify-center">
       <input
         type="email"
         placeholder="Enter your email"
@@ -222,8 +222,9 @@ export default function Services() {
       <button className="bg-red-600 text-white px-6 py-3 rounded-r-lg hover:bg-red-700 transition">
         Subscribe
       </button>
-    </div>
+    </div> */}
   </div>
+
 </div>
 
 

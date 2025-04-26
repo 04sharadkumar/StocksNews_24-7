@@ -84,12 +84,12 @@ export default function Sidebar() {
           </li>
 
           {/* New */}
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-red-900 transition-all duration-200">
           <IoMdLogOut size={32} />
             <button>
             <Link 
             to="/" 
-            className="block px-4 py-2 text-red-500 hover:bg-gray-100" 
+            className="block px-4 py-2 text-red-500 hover:text-gray-100" 
             onClick={handleLogout}
           >
             Logout

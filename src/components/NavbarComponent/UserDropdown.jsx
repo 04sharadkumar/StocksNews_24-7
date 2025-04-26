@@ -73,10 +73,13 @@ const UserDropdown = () => {
             className="block px-4 py-2 text-red-500 hover:bg-gray-100" 
             onClick={handleLogout}
           >
-            Logout
+            Logout {/* Logout Button */}
           </Link>
-
-          {/* Login Button - Opens Modal */}
+          <Link to="/admin " className="block px-4 py-2 hover:bg-gray-100" onClick={() => setIsDropdownOpen(false)}>
+            Admin
+          </Link>
+          
+          {/* Login Button - Opens Modal
           <button 
             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
             onClick={() => {
@@ -85,7 +88,8 @@ const UserDropdown = () => {
             }}
           >
             Login
-          </button>
+          </button> */}
+
         </div>
       )}
 

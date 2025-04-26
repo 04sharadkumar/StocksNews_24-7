@@ -73,9 +73,11 @@ const Navbar = () => {
             
             <SidebarButton />
             <FaRegNewspaper className="hidden sm:inline text-blue-600 dark:text-blue-400 text-2xl mr-2" />
+            <Link to='/'>
             <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-purple-400">
                   NexusNews
             </h1>
+            </Link>
             <TimeDisplay time={time} className="hover:text-yellow-400 transition-all duration-200 cursor-pointer" />
             <Link to="/WeatherNav">
             {getWeatherIconByCondition(weatherCondition, isDaytime)}
