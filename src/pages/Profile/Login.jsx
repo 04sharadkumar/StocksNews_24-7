@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/Auth/AuthContext";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -13,41 +15,48 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        
         setError(""); // Reset error state
 
-        try {
-            const response = await fetch("http://localhost:5000/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-                
-                
-            });
+        const loginPromise = new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch("http://localhost:5000/api/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password }),
+                });
 
-            const data = await response.json();
-            console.log(data)
+                const data = await response.json();
+                console.log(data);
 
-            if (!response.ok) {
-                setError(data.message || "Login failed. Please try again.");
-                return;
+                if (response.ok) {
+                    // Save token & user info
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    localStorage.setItem("userId", data.user._id);
+
+                    // Update AuthContext
+                    login(data.user);
+
+                    resolve(); // ✅ Promise resolve (success)
+                    
+                    // Redirect after login
+                    navigate(location.state?.from || "/");
+                } else {
+                    reject(data.message || "Login failed. Please try again."); // ❌ Promise reject (API error)
+                    setError(data.message || "Login failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("🚨 Login Error:", error);
+                reject("Server error. Please try again."); // ❌ Promise reject (network error)
+                setError("Server error. Please try again.");
             }
+        });
 
-            // Save token & user info
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            localStorage.setItem("userId", data.user._id); //store the user data with token or id
-
-            // Update AuthContext
-            login(data.user);
-
-            // Redirect to previous or home page
-            navigate(location.state?.from || "/");
-
-        } catch (error) {
-            console.log("🚨 Login Error:", error);
-            setError("Server error. Please try again.");
-        }
+        toast.promise(loginPromise, {
+            pending: "Processing your request...",
+            success: "Login successful!",
+            error: "Operation failed!",
+        });
     };
 
     return (
@@ -90,9 +99,7 @@ const Login = () => {
                         </Link>
                     </p>
                 </form>
-               
             </div>
-            
         </div>
     );
 };

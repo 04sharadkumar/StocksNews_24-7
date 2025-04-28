@@ -13,16 +13,16 @@ function Footer() {
           <div>
             <h2 className="text-lg font-semibold mb-4">Follow Us</h2>
             <div className="flex justify-center md:justify-start space-x-6">
-              <Link to="#" className="hover:text-amber-500 transition duration-300">
+              <Link to="#" className="hover:text-blue-500 transition duration-300">
                 <FaFacebook size={26} />
               </Link>
-              <Link to="#" className="hover:text-amber-500 transition duration-300">
+              <Link to="#" className="hover:text-blue-500 transition duration-300">
                 <FaTwitter size={26} />
               </Link>
-              <Link to="#" className="hover:text-amber-500 transition duration-300">
+              <Link to="#" className="hover:text-pink-500 transition duration-300">
                 <FaInstagram size={26} />
               </Link>
-              <Link to="#" className="hover:text-amber-500 transition duration-300">
+              <Link to="#" className="hover:text-red-500  transition duration-300">
                 <FaYoutube size={26} />
               </Link>
             </div>
@@ -32,10 +32,10 @@ function Footer() {
 <div className="hidden md:block">
   <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
   <ul className="space-y-3">
-    <li><Link to="/" className="hover:text-amber-500 transition duration-300">Home</Link></li>
-    <li><Link to="/about" className="hover:text-amber-500 transition duration-300">About</Link></li>
-    <li><Link to="/services" className="hover:text-amber-500 transition duration-300">Services</Link></li>
-    <li><Link to="/contact" className="hover:text-amber-500 transition duration-300">Contact</Link></li>
+    <li><Link to="/" className="hover:text-blue-500 transition duration-300">Home</Link></li>
+    <li><Link to="/about" className="hover:text-blue-500 transition duration-300">About</Link></li>
+    <li><Link to="/services" className="hover:text-blue-500 transition duration-300">Services</Link></li>
+    <li><Link to="/contact" className="hover:text-blue-500 transition duration-300">Contact</Link></li>
   </ul>
 </div>
 

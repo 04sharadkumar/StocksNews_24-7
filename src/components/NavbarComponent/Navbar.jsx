@@ -5,7 +5,7 @@ import TimeDisplay from "./TimeDisplay";
 import NavigationLinks from "./NavigationLinks";
 import SearchBar from "./SearchBar";
 import UserDropdown from "./UserDropdown";
-import GoogleTranslate from "@/GoogleTranslate/GoogleTranslate";
+
 import { FaBell ,FaRegNewspaper} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { getWeatherIconByCondition } from "@/utils/weatherUtils"; // Adjust path as needed
@@ -36,6 +36,7 @@ const Navbar = () => {
     fetchNotifications();
   }, []);
 
+  // Fetch weather data based on user's location
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       try {
@@ -89,10 +90,10 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <SearchBar />
             <div className="">
-              {/* <GoogleTranslate /> */}
-              <button className="p-2 rounded-full bg-gray-700 text-gray-300 hover:text-blue-400">
+             
+              {/* <button className="p-2 rounded-full bg-gray-700 text-gray-300 hover:text-blue-400">
               <FiSun size={18} />
-              </button>
+              </button> */}
             </div>
             <div className="relative">
              
@@ -110,6 +111,7 @@ const Navbar = () => {
             </div>
             
             <UserDropdown className='p-2 bg-amber-500' />
+
           </div>
         </div>
       </nav>
