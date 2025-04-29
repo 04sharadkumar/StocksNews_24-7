@@ -92,7 +92,7 @@ function AppRoutes() {
       <Route path="/StocksNews" element={<ProtectedRoute><StocksNews /></ProtectedRoute>} />
       <Route path="/GlobalNews" element={<ProtectedRoute><GlobalNews /></ProtectedRoute>} />
       <Route path="/CountryNews" element={<ProtectedRoute><CountryNews /></ProtectedRoute>} />
-      <Route path="/Test" element={<ProtectedRoute><Test /></ProtectedRoute>} />
+      <Route path="/Test" element={<Test />}/>
       <Route path="/SearchQuery" element={<ProtectedRoute><SearchQuery /></ProtectedRoute>} />
     </Routes>
   );
