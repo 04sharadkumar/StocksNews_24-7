@@ -20,7 +20,7 @@ const Navbar = () => {
   const previousPathRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-
+  
   // Handle Weather toggle
   const handleWeatherToggle = () => {
     if (!isWeatherPage) {
