@@ -19,7 +19,7 @@ export default function NewsSettings() {
   const [settings, setSettings] = useState(() => {
     const savedSettings = localStorage.getItem("newsSettings");
     return savedSettings ? JSON.parse(savedSettings) : {
-      theme: "light", // Default to light theme
+      theme: "light",
       notifications: true,
       breakingNewsAlerts: true,
       language: "English",
@@ -73,7 +73,7 @@ export default function NewsSettings() {
         } mb-1`}>{label}</label>
         {description && (
           <p className={`text-xs ${
-            settings.theme === "dark" ? "text-gray-300" : "text-gray-600"
+            settings.theme === "dark" ? "text-gray-400" : "text-gray-600"
           }`}>{description}</p>
         )}
       </div>
@@ -87,7 +87,7 @@ export default function NewsSettings() {
     <div className={`min-h-screen ${
       settings.theme === "dark" ? "bg-black" : "bg-white"
     } p-4 md:p-6 transition-colors duration-200`}>
-      <div className={`max-w-3xl mx-auto rounded-xl shadow-lg overflow-hidden ${
+      <div className={`max-w-3xl mx-auto rounded-lg overflow-hidden ${
         settings.theme === "dark" ? "bg-gray-900" : "bg-white border border-gray-200"
       }`}>
         {/* Header */}
@@ -103,12 +103,12 @@ export default function NewsSettings() {
               }`} />
               <h1 className={`text-2xl font-bold ${
                 settings.theme === "dark" ? "text-white" : "text-black"
-              }`}>Settings</h1>
+              }`}>News Settings</h1>
             </div>
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              isModified ? "bg-yellow-500 text-black" : "bg-green-500 text-white"
+              isModified ? "bg-gray-200 text-black" : settings.theme === "dark" ? "bg-gray-700 text-white" : "bg-gray-200 text-black"
             }`}>
-              {isModified ? "Unsaved Changes" : "All Saved"}
+              {isModified ? "Unsaved" : "Saved"}
             </span>
           </div>
         </div>
@@ -121,23 +121,23 @@ export default function NewsSettings() {
                 name="theme"
                 value={settings.theme}
                 onChange={handleChange}
-                className={`w-full p-2 rounded-lg border ${
+                className={`w-full p-2 rounded-md border ${
                   settings.theme === "dark" ? 
                   "bg-gray-800 border-gray-700 text-white" : 
                   "bg-white border-gray-300 text-black"
                 }`}
               >
-                <option value="light">Light Mode</option>
-                <option value="dark">Dark Mode</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
               </select>
             </SettingItem>
 
-            <SettingItem label="Text Size" description="Adjust article text size">
+            <SettingItem label="Text Size">
               <select
                 name="textSize"
                 value={settings.textSize}
                 onChange={handleChange}
-                className={`w-full p-2 rounded-lg border ${
+                className={`w-full p-2 rounded-md border ${
                   settings.theme === "dark" ? 
                   "bg-gray-800 border-gray-700 text-white" : 
                   "bg-white border-gray-300 text-black"
@@ -146,11 +146,10 @@ export default function NewsSettings() {
                 <option value="small">Small</option>
                 <option value="medium">Medium</option>
                 <option value="large">Large</option>
-                <option value="extraLarge">Extra Large</option>
               </select>
             </SettingItem>
 
-            <SettingItem label="Show Images" description="Display images in articles">
+            <SettingItem label="Show Images">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -161,8 +160,8 @@ export default function NewsSettings() {
                 />
                 <div className={`w-11 h-6 rounded-full peer ${
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
@@ -170,7 +169,7 @@ export default function NewsSettings() {
 
           {/* Notifications Section */}
           <SettingSection title="Notifications" icon={settings.notifications ? Bell : BellOff}>
-            <SettingItem label="Enable Notifications" description="Receive app notifications">
+            <SettingItem label="Enable Notifications">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -181,16 +180,13 @@ export default function NewsSettings() {
                 />
                 <div className={`w-11 h-6 rounded-full peer ${
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
 
-            <SettingItem 
-              label="Breaking News Alerts" 
-              description="Get immediate notifications for breaking news"
-            >
+            <SettingItem label="Breaking News Alerts">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -204,21 +200,21 @@ export default function NewsSettings() {
                   !settings.notifications ? 
                   "bg-gray-400 cursor-not-allowed" :
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
           </SettingSection>
 
           {/* Content Preferences */}
-          <SettingSection title="Content Preferences" icon={Bookmark}>
-            <SettingItem label="Language" description="Preferred news language">
+          <SettingSection title="Content" icon={Bookmark}>
+            <SettingItem label="Language">
               <select
                 name="language"
                 value={settings.language}
                 onChange={handleChange}
-                className={`w-full p-2 rounded-lg border ${
+                className={`w-full p-2 rounded-md border ${
                   settings.theme === "dark" ? 
                   "bg-gray-800 border-gray-700 text-white" : 
                   "bg-white border-gray-300 text-black"
@@ -227,12 +223,10 @@ export default function NewsSettings() {
                 <option value="English">English</option>
                 <option value="Hindi">Hindi</option>
                 <option value="Spanish">Spanish</option>
-                <option value="French">French</option>
-                <option value="German">German</option>
               </select>
             </SettingItem>
 
-            <SettingItem label="Auto-play Videos" description="Play videos automatically">
+            <SettingItem label="Auto-play Videos">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -243,13 +237,13 @@ export default function NewsSettings() {
                 />
                 <div className={`w-11 h-6 rounded-full peer ${
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
 
-            <SettingItem label="Save Read Articles" description="Keep history of articles you've read">
+            <SettingItem label="Save Read Articles">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -260,8 +254,8 @@ export default function NewsSettings() {
                 />
                 <div className={`w-11 h-6 rounded-full peer ${
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
@@ -269,7 +263,7 @@ export default function NewsSettings() {
 
           {/* Privacy Section */}
           <SettingSection title="Privacy" icon={settings.privacyMode ? EyeOff : Eye}>
-            <SettingItem label="Privacy Mode" description="Hide your reading history">
+            <SettingItem label="Privacy Mode">
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -280,8 +274,8 @@ export default function NewsSettings() {
                 />
                 <div className={`w-11 h-6 rounded-full peer ${
                   settings.theme === "dark" ? 
-                  "bg-gray-700 peer-checked:bg-blue-600" : 
-                  "bg-gray-200 peer-checked:bg-blue-500"
+                  "bg-gray-700 peer-checked:bg-white" : 
+                  "bg-gray-200 peer-checked:bg-black"
                 } peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all`}></div>
               </label>
             </SettingItem>
@@ -294,28 +288,28 @@ export default function NewsSettings() {
             <button
               type="button"
               onClick={() => window.location.reload()}
-              className={`px-5 py-2.5 rounded-lg border ${
+              className={`px-5 py-2.5 rounded-md border ${
                 settings.theme === "dark" ? 
                 "border-gray-700 hover:bg-gray-800 text-white" : 
                 "border-gray-300 hover:bg-gray-100 text-black"
               } transition-colors`}
             >
-              Reset Changes
+              Reset
             </button>
             <button
               type="submit"
               disabled={!isModified}
-              className={`px-5 py-2.5 rounded-lg text-white font-medium transition-colors ${
+              className={`px-5 py-2.5 rounded-md font-medium transition-colors ${
                 isModified ? 
                   settings.theme === "dark" ? 
-                  "bg-blue-600 hover:bg-blue-700" : 
-                  "bg-blue-500 hover:bg-blue-600" : 
+                  "bg-white text-black hover:bg-gray-200" : 
+                  "bg-black text-white hover:bg-gray-800" : 
                   settings.theme === "dark" ? 
-                  "bg-gray-700 cursor-not-allowed" : 
-                  "bg-gray-300 cursor-not-allowed"
+                  "bg-gray-800 cursor-not-allowed text-gray-400" : 
+                  "bg-gray-200 cursor-not-allowed text-gray-500"
               }`}
             >
-              Save Settings
+              Save
             </button>
           </div>
         </form>

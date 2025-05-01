@@ -1,84 +1,50 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
-
-
+import { createContext, useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(""); // To handle error state for login
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Function to decode JWT token manually
-    const decodeJwt = (token) => {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const decodedPayload = JSON.parse(atob(base64));
-        return decodedPayload;
-    };
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+    setLoading(false);
+  }, []);
 
-    // Function to check token validity
-    const checkAuth = async () => {
-        const token = localStorage.getItem("token");
-        
+  const login = async (email, password) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
+        email,
+        password,
+      });
 
-        if (!token) {
-            setUser(null);
-            setLoading(false);
-            return;
-        }
-        if(token){
+      const { user, token } = response.data;
 
-        }
+      setUser(user);
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token); // ✅ Store token in localStorage
 
-        try {
-            const decoded = decodeJwt(token);
-            const currentTime = Date.now() / 1000;
-            if (decoded.exp < currentTime) {
-                localStorage.removeItem("token");
-                setUser(null);
-                setLoading(false);
-                return;
-            }
+      return response;
+    } catch (error) {
+      throw new Error("Login failed");
+    }
+  };
 
-            const res = await axios.get("http://localhost:5000/api/user", {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token"); // ✅ Remove token on logout
+  };
 
-            setUser(res.data.user);
-        } catch (error) {
-            localStorage.removeItem("token");
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        checkAuth();
-        
-        
-    }, []);
-
-    // ✅ Fixed this: login should only update state, since the actual API call is done in Login.jsx
-    const login = (userData) => {
-        setUser(userData);
-        setError("");
-    };
-
-    const logout = () => {
-        localStorage.removeItem("token");
-        setUser(null);
-    };
-
-    return (
-        <AuthContext.Provider value={{ user, login, logout, loading, error }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
-
-export const useAuth = () => useContext(AuthContext);
- 

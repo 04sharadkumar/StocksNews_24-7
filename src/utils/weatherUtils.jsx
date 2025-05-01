@@ -1,4 +1,3 @@
-// utils/weatherUtils.js
 import {
     Sun, Cloud, CloudRain, CloudSnow, CloudLightning, 
     CloudFog, Droplets, Moon

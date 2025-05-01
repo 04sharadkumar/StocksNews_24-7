@@ -19,7 +19,7 @@ import AdminLayout from "./components/AdminLayout.jsx";
 import Settings from "./pages/admin/Setting.jsx";
 import ManageUsers from "./pages/admin/ManageUsers.jsx";
 import ViewArticles from "./pages/admin/ViewArticles.jsx"; 
-
+import AdminLogin from "./pages/admin/AdminLogin.jsx";
 
 // Example Pages
 import Home from "./pages/Home";
@@ -78,6 +78,7 @@ function AppRoutes() {
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/WeatherNav" element={<WeatherNav />} />
       {/* admin routes  */}
+      <Route path="/AdminLogin" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminLayout />}>
            <Route path="dashboard" element={<AdminDashboard />} />
            <Route path="addNews" element={<AddNews />} />   

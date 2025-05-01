@@ -8,19 +8,15 @@ const GlobalNews = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const API_KEY = 'b88df71f04a74c5693e9cdae86ed05ae';
-
     const fetchNews = async (initial = false) => {
         setLoading(true);
         setError(null);
 
         try {
-            const response = await axios.get(`https://newsapi.org/v2/everything?q=${query || 'latest'}&apiKey=${API_KEY}`);
-            console.log(response);
-            const filteredNews = response.data.articles.filter(article =>
-                article.title.toLowerCase().includes(query.toLowerCase())
-            );
-            setNews(filteredNews.slice(0, initial ? 5 : 10));
+            const response = await axios.get(`http://localhost:5000/api/news/globalNews`, {
+                params: { query: query || 'latest' }
+            });
+            setNews(response.data.articles.slice(0, initial ? 5 : 10));
         } catch (err) {
             setError('Could not fetch news data.');
         } finally {

@@ -1,38 +1,42 @@
 import { useSidebar } from "../SidebarProvider/SidebarProvider";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt  } from "react-icons/fa"; // Icons
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaInfoCircle, FaServicestack, FaPhoneAlt } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
 import { toast } from 'react-toastify';
-//logoout ke liye hy ye
-import { useAuth } from "../Auth/AuthContext" 
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Auth/AuthContext";
 
 export default function Sidebar() {
-  const { open, setOpen } = useSidebar(); // Get state from context
+  const { open, setOpen } = useSidebar();
+  const { logout } = useAuth(); // Access logout method from AuthContext
+  const navigate = useNavigate();
 
-  // Function to close sidebar on link click
-  const closeSidebar = () => {
-    setOpen(false);
-  };
-    const handleLogout = () => {
-      setIsDropdownOpen(false); // Close dropdown if it's open
-  
-      logout(); // Call logout function from AuthContext
-      localStorage.removeItem("profileData"); // Remove user profile data
-      localStorage.removeItem("profileImage"); // Remove profile image
-      navigate("/login"); // Redirect to login page
-  
-      // Show success toast notification
-      toast.success("Logged Out Successfully!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-      });
+  const closeSidebar = () => setOpen(false);
+
+  const handleLogout = () => {
+    // Check if user is logged in (token should exist in localStorage)
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("You are not logged in.");
+      return; // Exit logout function if no token is found
+    }
+
+    logout(); // Call backend logout
+    localStorage.removeItem("user"); // Clear user data
+    localStorage.removeItem("token"); // Optional: Remove token
+
+    toast.success("Logged out successfully!", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+    });
+
+    navigate("/login");
   };
 
   return (
@@ -43,11 +47,9 @@ export default function Sidebar() {
           open ? "translate-x-0" : "-translate-x-full"
         } z-50 border-r border-gray-800`}
       >
-        {/* Close Button */}
         <button
           onClick={closeSidebar}
-          className="absolute top-4 right-4 text-white text-2xl hover:text-red-500 transition-all duration-200"
-          aria-label="Close sidebar"
+          className="absolute top-4 right-4 text-white text-2xl hover:text-red-500"
         >
           <AiOutlineClose className="text-3xl" />
         </button>
@@ -55,64 +57,44 @@ export default function Sidebar() {
         <h2 className="text-2xl font-semibold mb-6 border-b border-gray-800 pb-2">
           News Portal
         </h2>
-        
-        <ul className="space-y-5 text-lg font-medium overflow-y-auto max-h-[calc(100vh-10rem)] no-scrollbar">
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
+
+        <ul className="space-y-5 text-lg font-medium max-h-[calc(100vh-10rem)] overflow-y-auto no-scrollbar">
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400">
             <FaHome size={20} />
-            <Link to="/" className="w-full text-white" onClick={closeSidebar}>
-              Home
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            <FaServicestack size={20} />
-            <Link to="/services" className="w-full text-white" onClick={closeSidebar}>
-              Services              
-            </Link>
-          </li>
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            <FaInfoCircle size={20} />
-            <Link to="/about" className="w-full text-white" onClick={closeSidebar}>
-              About
-            </Link>
-          </li>
-         
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400 transition-all duration-200">
-            <FaPhoneAlt size={20} />
-            <Link to="/contact" className="w-full text-white" onClick={closeSidebar}>
-              Contact
-            </Link>
+            <Link to="/" onClick={closeSidebar} className="w-full">Home</Link>
           </li>
 
-          {/* New */}
-          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-red-900 transition-all duration-200">
-          <IoMdLogOut size={32} />
-            <button>
-            <Link 
-            to="/" 
-            className="block px-4 py-2 text-red-500 hover:text-gray-100" 
-            onClick={handleLogout}
-          >
-            Logout
-          </Link>
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400">
+            <FaServicestack size={20} />
+            <Link to="/services" onClick={closeSidebar} className="w-full">Services</Link>
+          </li>
+
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400">
+            <FaInfoCircle size={20} />
+            <Link to="/about" onClick={closeSidebar} className="w-full">About</Link>
+          </li>
+
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400">
+            <FaPhoneAlt size={20} />
+            <Link to="/contact" onClick={closeSidebar} className="w-full">Contact</Link>
+          </li>
+
+          <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-red-400">
+            <IoMdLogOut size={24} />
+            <button onClick={handleLogout} className="w-full text-left text-red-500 hover:text-white">
+              Logout
             </button>
           </li>
-         
-          
-          
         </ul>
-        
       </aside>
 
       {/* Backdrop */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 backdrop-blur-md"
+          className="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm"
           onClick={closeSidebar}
         ></div>
       )}
     </>
   );
 }
-
-
-
