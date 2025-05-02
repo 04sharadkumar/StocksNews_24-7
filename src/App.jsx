@@ -22,10 +22,10 @@ import ViewArticles from "./pages/admin/ViewArticles.jsx";
 import AdminLogin from "./pages/admin/AdminLogin.jsx";
 
 // Example Pages
-import Home from "./pages/Home";
-import About from "./pages/About";
+import Home from "./pages/Home/Home.jsx";
+import About from "./pages/About/About.jsx";
 import Services from "./pages/Services.jsx";
-import Contact from "./pages/Contact";
+import Contact from "./pages/Contact/Contact.jsx";
 import LiveVideoNews from "./pages/LiveVideoNews.jsx";
 import Youtube from "./pages/Youtube.jsx";
 import GlobalNews from "./pages/GlobalNews.jsx";

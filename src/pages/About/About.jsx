@@ -1,9 +1,9 @@
 // pages/AboutPage.js
-import MissionSection from "@/components/About/MissionSection";
-import WhyChooseUs from "@/components/About/WhyChooseUs";
-import TimelineSection from "@/components/About/TimelineSection";
-import EditorialValues from "@/components/About/EditorialValues";
-import TeamSection from "@/components/About/TeamSection";
+import MissionSection from "./MissionSection";
+import WhyChooseUs from "./WhyChooseUs";
+import TimelineSection from "./TimelineSection";
+import EditorialValues from "./EditorialValues";
+import TeamSection from "./TeamSection";
 
 export default function AboutPage() {
   return (

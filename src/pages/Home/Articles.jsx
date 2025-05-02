@@ -87,7 +87,7 @@ function Articles() {
 </div>
 
       {/* Filters and Search */}
-      <div className="mb-12 bg-white rounded-xl shadow-sm p-6 sticky top-0 z-10 border border-gray-100">
+      <div className="mb-12 bg-white rounded-xl shadow-sm p-2  border border-gray-100">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="relative flex-grow max-w-2xl">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -98,7 +98,7 @@ function Articles() {
             <input
               type="text"
               placeholder="Search articles..."
-              className="w-full px-4 py-3 pl-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+              className="w-full px-4 py-2 pl-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

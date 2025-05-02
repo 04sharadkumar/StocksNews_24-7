@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import BreakingNewsAlert from '../components/news/BreakingNewsAlert';
-import NewsHero from '../components/news/NewsHero';
-import SpecialFeatures from '../components/news/SpecialFeatures';
-import LoadingSpinner from '../components/ui/LoadingSpinner';
-import Articles from '@/components/news/Articles';
+import BreakingNewsAlert from './BreakingNewsAlert';
+import NewsHero from './NewsHero';
+import SpecialFeatures from './SpecialFeatures';
+import LoadingSpinner from '@/components/ui/LoadingSpinner'
+import Articles from './Articles';
 
 const NextGenNewsHome = () => {
   const [isLoading, setIsLoading] = useState(true);
