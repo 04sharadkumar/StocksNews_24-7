@@ -81,6 +81,57 @@ const StocksNews = () => {
     },
   ];
 
+  const marketNews = [
+    {
+      id: 1,
+      title: "Sensex surges 600 points as RBI keeps rates unchanged",
+      description: "The Reserve Bank of India maintained status quo on key policy rates as expected, sending banking stocks higher.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtsURAwKjjUzi4tC03S_7m5i9rHGmfmd-gpw&s",
+      date: "2 hours ago",
+      source: "Economic Times"
+    },
+    {
+      id: 2,
+      title: "Tata Motors reports 35% jump in Q4 profit",
+      description: "Automaker beats street estimates with strong performance in domestic and Jaguar Land Rover businesses.",
+      image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      date: "4 hours ago",
+      source: "Business Standard"
+    },
+    {
+      id: 3,
+      title: "Global markets rally as Fed signals dovish stance",
+      description: "Asian markets followed Wall Street higher after the US Federal Reserve indicated no immediate rate hikes.",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      date: "6 hours ago",
+      source: "Reuters"
+    },
+    {
+      id: 4,
+      title: "Gold prices hit record high amid geopolitical tensions",
+      description: "Safe-haven demand pushes gold to all-time high as investors seek refuge from market volatility.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY0rqpJxnhH8eNKYlDUv_39zGXk-PKhjnL5g&s",
+      date: "8 hours ago",
+      source: "Bloomberg"
+    },
+    {
+      id: 5,
+      title: "IT sector outlook remains strong despite margin pressures",
+      description: "Analysts maintain positive stance on IT stocks as deal pipelines remain robust across top firms.",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      date: "10 hours ago",
+      source: "Moneycontrol"
+    },
+    {
+      id: 6,
+      title: "Oil prices decline after US inventory build-up",
+      description: "Brent crude falls below $85 per barrel as US stockpiles rise more than expected last week.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSprSa1D-P28i-2kgRPBuugTmtnwdub4r4ikQ&s",
+      date: "12 hours ago",
+      source: "CNBC"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Header with Search */}
@@ -244,22 +295,47 @@ const StocksNews = () => {
           </div>
         </div>
 
-        {/* Market News (Placeholder) */}
+        {/* Market News */}
         <div className="bg-white rounded-xl shadow-md p-6 mt-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Market News</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="h-40 bg-gray-200 rounded mb-3 animate-pulse"></div>
-                <h3 className="font-semibold text-gray-800 mb-2">Market update: Sensex gains 500 points as banking stocks rally</h3>
-                <p className="text-sm text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore...</p>
-                <span className="text-xs text-blue-600">Read more →</span>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold text-gray-800">Market News</h2>
+            <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
+              View All News →
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {marketNews.map((news) => (
+              <div key={news.id} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-48 relative">
+                  <img 
+                    src={news.image} 
+                    alt={news.title} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = "https://via.placeholder.com/500x300?text=Market+News";
+                    }}
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <span className="text-xs text-white bg-blue-600 px-2 py-1 rounded-full">{news.source}</span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2">{news.title}</h3>
+                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{news.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">{news.date}</span>
+                    <button className="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                      Read more <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
-
     </div>
   );
 };

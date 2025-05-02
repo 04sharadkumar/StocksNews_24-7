@@ -17,7 +17,7 @@ const features = [
     title: "Space Exploration",
     excerpt: "The next frontier for human civilization",
     category: "SPACE",
-    image: ''
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTmxDzxifUGrMnaayPavlWpEM4F55b6ft7oQ&s'
   },
   {
     title: "Health Tech",
