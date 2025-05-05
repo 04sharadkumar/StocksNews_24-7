@@ -27,35 +27,33 @@ const features = [
   }
 ];
 
-const SpecialFeatures = ({ darkMode }) => {
+const SpecialFeatures = () => {
   return (
-    <section className="mt-16">
-      <h2 className="text-2xl font-bold dark:text-white mb-6">In-Depth Features</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="mt-4 p-6 bg-gray-100 rounded-2xl shadow-lg">
+      <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">In-Depth Features</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {features.map((feature, index) => (
-          <div 
-            key={index} 
-            className={`rounded-xl overflow-hidden shadow-md hover:shadow-lg transition ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white hover:bg-gray-50'}`}
+          <div
+            key={index}
+            className="rounded-2xl overflow-hidden shadow-md transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white"
           >
             <div className="relative h-48">
-              {feature.image && (
-                <img 
-                  src={feature.image} 
-                  alt={feature.title}
-                  className="w-full h-full object-cover"
-                />
-              )}
-              <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t ${darkMode ? 'from-gray-900' : 'from-black'} to-transparent`}>
-                <span className={`text-xs font-medium px-2 py-1 rounded-md ${darkMode ? 'bg-blue-900/70 text-blue-200' : 'bg-blue-100 text-blue-800'}`}>
-                  {feature.category}
-                </span>
-              </div>
+              <img
+                src={feature.image}
+                alt={feature.title}
+                className="w-full h-full object-cover"
+              />
+              <span className="absolute top-3 left-3 px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                {feature.category}
+              </span>
             </div>
             <div className="p-5">
-              <h3 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'}`}>
+              <h3 className="text-lg font-bold mb-2 text-gray-800 hover:text-blue-600 transition-colors duration-300">
                 <a href="#">{feature.title}</a>
               </h3>
-              <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{feature.excerpt}</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {feature.excerpt}
+              </p>
             </div>
           </div>
         ))}

@@ -63,6 +63,7 @@ export default function Sidebar() {
             <FaHome size={20} />
             <Link to="/" onClick={closeSidebar} className="w-full">Home</Link>
           </li>
+          
 
           <li className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-800 hover:text-blue-400">
             <FaServicestack size={20} />

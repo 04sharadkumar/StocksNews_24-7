@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { FiClock, FiUser, FiAlertTriangle, FiTrendingUp } from 'react-icons/fi';
-
+import { MdOutlineDownloading } from "react-icons/md";
 function Articles() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -77,7 +77,7 @@ function Articles() {
   }
 
   return (
-    <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-2">
+    <div className="container max-w-8xl mx-auto px-4 sm:px-6 py-2">
       {/* Header Section */}
       <div className="text-center mb-10 md:mb-12">
   <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Latest News & Updates</h1>
@@ -218,9 +218,9 @@ function Articles() {
             <div className="mt-14 text-center">
               <button 
                 onClick={loadMoreArticles}
-                className="px-8 py-3 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md font-medium text-lg"
-              >
-                Load More Articles
+                className="px-8 py-3 bg-white border border-gray-200 flex justify-end rounded-lg text-gray-700 hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md font-medium text-lg"
+              >Load More Articles . . .
+                
               </button>
             </div>
           )}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Globe2, Tv, TrendingUp, Newspaper } from "lucide-react";
-import { useSidebar } from "../SidebarProvider/SidebarProvider";
+import { useSidebar } from "@/SidebarProvider/SidebarProvider";
 
 const navItems = [
   { id: "home", title: "Home", icon: Home, path: "/" },

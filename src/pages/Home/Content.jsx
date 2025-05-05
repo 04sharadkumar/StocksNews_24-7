@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const CountryNews = () => {
+const Content = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,12 +35,12 @@ const CountryNews = () => {
   }, [country, language]);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-gray-900">Latest News</h2>
+    <div className="p-6 max-w-8xl mx-auto">
+      <h2 className="text-3xl font-bold mb-6 text-gray-900 flex justify-center">Read with NexusNews</h2>
 
       {/* Dropdowns for Country and Language */}
       <div className="mb-6 flex flex-col sm:flex-row gap-4">
-        <select
+        {/* <select
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -52,9 +52,9 @@ const CountryNews = () => {
           <option value="de">Germany</option>
           <option value="cn">China</option>
           <option value="jp">Japan</option>
-        </select>
+        </select> */}
 
-        <select
+        {/* <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
           className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -65,7 +65,7 @@ const CountryNews = () => {
           
           <option value="zh">Chinese</option>
          
-        </select>
+        </select> */}
       </div>
 
       {loading && (
@@ -106,4 +106,4 @@ const CountryNews = () => {
   );
 };
 
-export default CountryNews;
+export default Content;

@@ -13,7 +13,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="relative w-full md:w-auto">
+    <div className="relative w-full md:w-auto hidden md:block">
       <input
         type="text"
         placeholder="Search news..."

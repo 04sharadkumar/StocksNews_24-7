@@ -4,6 +4,7 @@ import NewsHero from './NewsHero';
 import SpecialFeatures from './SpecialFeatures';
 import LoadingSpinner from '@/components/ui/LoadingSpinner'
 import Articles from './Articles';
+import Content from './Content';
 
 const NextGenNewsHome = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,6 +37,7 @@ const NextGenNewsHome = () => {
         (<> 
         <NewsHero />
         <Articles />
+        <Content />
         <SpecialFeatures /> 
         
         </>)  }

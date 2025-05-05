@@ -3,7 +3,7 @@ import { SidebarProvider } from "./SidebarProvider/SidebarProvider.jsx";
 import Navbar from "./components/NavbarComponent/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Sidebar from "./components/Sidebar.jsx";
-import BottomNav from "./pages/BottomNav.jsx";
+import BottomNav from "./pages/BottomNav/BottomNav.jsx";
 import SearchResults from "./pages/SearchResult.jsx";
 
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
@@ -24,13 +24,17 @@ import AdminLogin from "./pages/admin/AdminLogin.jsx";
 // Example Pages
 import Home from "./pages/Home/Home.jsx";
 import About from "./pages/About/About.jsx";
-import Services from "./pages/Services.jsx";
+import Services from "./pages/Services/Services.jsx";
 import Contact from "./pages/Contact/Contact.jsx";
-import LiveVideoNews from "./pages/LiveVideoNews.jsx";
-import Youtube from "./pages/Youtube.jsx";
-import GlobalNews from "./pages/GlobalNews.jsx";
-import StocksNews from "./pages/StocksNews.jsx";
-import CountryNews from "./pages/CountryNews.jsx";
+
+
+import CountryNews from "./pages/BottomNav/CountryNews.jsx";
+import LiveVideoNews from "./pages/BottomNav/LiveVideoNews.jsx";
+import StocksNews from "./pages/BottomNav/StocksNews.jsx";
+import GlobalNews from './pages/BottomNav/GlobalNews.jsx'
+
+
+
 import Test from "./pages/Test.jsx";
 import SearchQuery from "./pages/SearchQuery.jsx";
 import WeatherNav from "./components/NavbarComponent/WeatherNav.jsx";
@@ -72,7 +76,7 @@ function AppRoutes() {
       <Route path="/about" element={<About />} />
       <Route path="/services" element={<Services />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/Youtube" element={<Youtube />} />
+      
       <Route path="/search" element={<SearchResults />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/SignUp" element={<SignUp />} />
